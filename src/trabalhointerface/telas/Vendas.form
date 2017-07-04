@@ -122,7 +122,7 @@
                           </Group>
                           <Component id="jButton12" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollBar1" max="32767" attributes="0"/>
               </Group>
@@ -175,7 +175,7 @@
           <Font name="Baskerville Old Face" size="18" style="0"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/coins.png"/>
+          <Image iconType="3" name="/icones/coins.png"/>
         </Property>
       </Properties>
     </Component>
@@ -185,7 +185,7 @@
           <Font name="Baskerville Old Face" size="18" style="0"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/002-voltar.png"/>
+          <Image iconType="3" name="/icones/002-voltar.png"/>
         </Property>
       </Properties>
       <Events>
@@ -200,7 +200,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/burger.png"/>
+          <Image iconType="3" name="/icones/burger.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Hamb&#xfa;rguer - R$ 8,00"/>
@@ -215,7 +215,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/001-french-fries.png"/>
+          <Image iconType="3" name="/icones/001-french-fries.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Batata-Frita - R$ 4,00"/>
@@ -227,7 +227,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/hot-dog.png"/>
+          <Image iconType="3" name="/icones/hot-dog.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Cachorro-Quente - R$ 8,00"/>
@@ -239,7 +239,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/anel cebola.png"/>
+          <Image iconType="3" name="/icones/anel cebola.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Anel de Cebola - R$ 4,00"/>
@@ -251,7 +251,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/002-doughnut.png"/>
+          <Image iconType="3" name="/icones/002-doughnut.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Donut - R$ 5,00"/>
@@ -263,7 +263,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/panqueca.png"/>
+          <Image iconType="3" name="/icones/panqueca.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Panqueca Doce - R$ 5,00"/>
@@ -275,7 +275,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/ice-cream.png"/>
+          <Image iconType="3" name="/icones/ice-cream.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Sorvete - R$ 3,00"/>
@@ -287,7 +287,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/picole.png"/>
+          <Image iconType="3" name="/icones/picole.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Picol&#xe9; - R$ 3,00"/>
@@ -299,7 +299,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/001-drink.png"/>
+          <Image iconType="3" name="/icones/001-drink.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Refrigerante - R$ 4,00"/>
@@ -314,7 +314,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/002-fruit.png"/>
+          <Image iconType="3" name="/icones/002-fruit.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Suco - R$ 4,00"/>
@@ -326,7 +326,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/003-cup.png"/>
+          <Image iconType="3" name="/icones/003-cup.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="Caf&#xe9; - R$ 4,00"/>
@@ -338,11 +338,14 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/water.png"/>
+          <Image iconType="3" name="/icones/water.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="toolTipText" type="java.lang.String" value="&#xc1;gua - R$ 3,00"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JScrollBar" name="jScrollBar1">
     </Component>

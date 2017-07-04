@@ -45,7 +45,7 @@ public class Consulta extends javax.swing.JFrame {
         setTitle("Consulta de Produtos");
 
         btnAdicionar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/add.png"))); // NOI18N
+        btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/add.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         jLabel1.setText("Consulta de Produtos");
@@ -87,11 +87,11 @@ public class Consulta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btnAlterar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/edit.png"))); // NOI18N
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
         btnAlterar.setText("Alterar");
 
         btnRemover.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/cancel-mark.png"))); // NOI18N
+        btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cancel-mark.png"))); // NOI18N
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class Consulta extends javax.swing.JFrame {
         });
 
         jButton5.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-voltar.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-voltar.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

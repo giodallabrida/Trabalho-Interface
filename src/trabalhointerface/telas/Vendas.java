@@ -65,10 +65,10 @@ public class Vendas extends javax.swing.JFrame {
         jLabel2.setText("Vendas");
 
         btnEncerra.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        btnEncerra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/coins.png"))); // NOI18N
+        btnEncerra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/coins.png"))); // NOI18N
 
         btnVoltar.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-voltar.png"))); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-voltar.png"))); // NOI18N
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
@@ -76,7 +76,7 @@ public class Vendas extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/burger.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/burger.png"))); // NOI18N
         jButton3.setText("0");
         jButton3.setToolTipText("Hambúrguer - R$ 8,00");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -86,42 +86,42 @@ public class Vendas extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/001-french-fries.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/001-french-fries.png"))); // NOI18N
         jButton4.setText("0");
         jButton4.setToolTipText("Batata-Frita - R$ 4,00");
 
         jButton5.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/hot-dog.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
         jButton5.setText("0");
         jButton5.setToolTipText("Cachorro-Quente - R$ 8,00");
 
         jButton6.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/anel cebola.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/anel cebola.png"))); // NOI18N
         jButton6.setText("0");
         jButton6.setToolTipText("Anel de Cebola - R$ 4,00");
 
         jButton8.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-doughnut.png"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-doughnut.png"))); // NOI18N
         jButton8.setText("0");
         jButton8.setToolTipText("Donut - R$ 5,00");
 
         jButton9.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/panqueca.png"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/panqueca.png"))); // NOI18N
         jButton9.setText("0");
         jButton9.setToolTipText("Panqueca Doce - R$ 5,00");
 
         jButton10.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/ice-cream.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/ice-cream.png"))); // NOI18N
         jButton10.setText("0");
         jButton10.setToolTipText("Sorvete - R$ 3,00");
 
         jButton11.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/picole.png"))); // NOI18N
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/picole.png"))); // NOI18N
         jButton11.setText("0");
         jButton11.setToolTipText("Picolé - R$ 3,00");
 
         jButton12.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/001-drink.png"))); // NOI18N
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/001-drink.png"))); // NOI18N
         jButton12.setText("0");
         jButton12.setToolTipText("Refrigerante - R$ 4,00");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -131,19 +131,24 @@ public class Vendas extends javax.swing.JFrame {
         });
 
         jButton13.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-fruit.png"))); // NOI18N
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-fruit.png"))); // NOI18N
         jButton13.setText("0");
         jButton13.setToolTipText("Suco - R$ 4,00");
 
         jButton14.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/003-cup.png"))); // NOI18N
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/003-cup.png"))); // NOI18N
         jButton14.setText("0");
         jButton14.setToolTipText("Café - R$ 4,00");
 
         jButton15.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/water.png"))); // NOI18N
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/water.png"))); // NOI18N
         jButton15.setText("0");
         jButton15.setToolTipText("Água - R$ 3,00");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,7 +232,7 @@ public class Vendas extends javax.swing.JFrame {
                                 .addComponent(jButton14)
                                 .addComponent(jButton15))
                             .addComponent(jButton12))
-                        .addGap(0, 15, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,6 +266,10 @@ public class Vendas extends javax.swing.JFrame {
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

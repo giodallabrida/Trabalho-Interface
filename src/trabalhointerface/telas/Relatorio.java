@@ -60,7 +60,7 @@ public class Relatorio extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/coins.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/coins.png"))); // NOI18N
         jLabel2.setText("Total do dia");
 
         jTextField1.setEditable(false);
@@ -71,7 +71,7 @@ public class Relatorio extends javax.swing.JFrame {
         });
 
         btnVoltar.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-voltar.png"))); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-voltar.png"))); // NOI18N
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);

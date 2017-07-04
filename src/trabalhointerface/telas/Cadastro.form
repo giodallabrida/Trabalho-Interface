@@ -87,7 +87,7 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -132,7 +132,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/correct-symbol.png"/>
+          <Image iconType="3" name="/icones/correct-symbol.png"/>
         </Property>
       </Properties>
       <Events>
@@ -145,7 +145,7 @@
           <Font name="Baskerville Old Face" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/cancel-mark.png"/>
+          <Image iconType="3" name="/icones/cancel-mark.png"/>
         </Property>
       </Properties>
       <Events>
@@ -166,7 +166,7 @@
           <Font name="Baskerville Old Face" size="18" style="0"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/trabalhointerface/telas/magnifier.png"/>
+          <Image iconType="3" name="/icones/magnifier.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Procurar &#xcd;cone"/>
       </Properties>

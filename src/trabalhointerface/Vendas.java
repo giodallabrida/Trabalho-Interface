@@ -2,7 +2,7 @@ package trabalhointerface;
 
 import trabalhointerface.telas.Inicio;
 
-public class TrabalhoInterface {
+public class Vendas {
 
     public static void main(String[] args) {
         Inicio inicio = new Inicio();
