@@ -1,15 +1,19 @@
 package trabalhointerface.telas;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import trabalhointerface.modelo.UsuarioDAO;
+import trabalhointerface.util.Validacao;
 
 public class Login extends javax.swing.JDialog {
-    
-    boolean autenticado;
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
+
+    boolean autenticado = false;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,16 +105,37 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        UsuarioDAO userDAO = new UsuarioDAO();
-        autenticado = userDAO.fazLogin(userUsuario, senhaUsuario); 
+        autenticado = fazLogin(userUsuario, senhaUsuario);
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Menu menu = new Menu();
         menu.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public static boolean criaLogin() {
+        Login login = new Login(null, true);
+        login.setVisible(true);
+        return login.autenticado;
+    }
+
+    public boolean fazLogin(JTextField user, JPasswordField senha) {
+        // validar nome de usuário e senha - não vazios...
+        boolean aux = false;
+        if (Validacao.validaCampo(user)
+                && Validacao.validaSenha(senha)) {
+            if (user.getText().equals("juca")
+                    && String.copyValueOf(senha.getPassword()).equals("juca")) {
+                // chamar o menu principal...
+                aux = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
+            }
+     }
+        return aux;
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

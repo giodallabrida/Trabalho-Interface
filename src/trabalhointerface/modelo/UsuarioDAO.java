@@ -5,10 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import trabalhointerface.persistencia.UsuarioDTO;
-import trabalhointerface.util.Validacao;
 
 public class UsuarioDAO {
     
@@ -39,19 +36,6 @@ public class UsuarioDAO {
         return usuarioDTO;
     }
 
-    public boolean fazLogin(JTextField user, JPasswordField senha) {
-        // validar nome de usuário e senha - não vazios...
-        boolean aux = false;
-        if (Validacao.validaCampo(user)
-                && Validacao.validaSenha(senha)) {
-            if (user.getText().equals("juca")
-                    && String.copyValueOf(senha.getPassword()).equals("juca")) {
-                // chamar o menu principal...
-                aux = true;
-            }
-        }
-        return aux;
-    }
 
     public void alteraLogin() {
 

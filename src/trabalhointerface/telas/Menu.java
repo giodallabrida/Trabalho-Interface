@@ -6,7 +6,6 @@
 package trabalhointerface.telas;
 
 import javax.swing.JOptionPane;
-import trabalhointerface.util.Estados;
 
 /**
  *
@@ -16,12 +15,6 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-    }
-
-    private Estados estadoTela;
-
-    public void setEstadoTela(Estados estadoTela) {
-        this.estadoTela = estadoTela;
     }
 
     @SuppressWarnings("unchecked")
@@ -157,7 +150,6 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        setEstadoTela(Estados.esCadastro);
         Login login = new Login(this, true);
         Cadastro cadastro = new Cadastro();
         cadastro.setVisible(true);
@@ -165,12 +157,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        setEstadoTela(Estados.esRelatorio);
-        Login login = new Login(this, true);
-        login.setVisible(true);
-        if (!login.autenticado) {
-            JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
-        } else {
+        if (Login.criaLogin()) {
             Relatorio rel = new Relatorio();
             rel.setVisible(true);
             this.setVisible(false);
@@ -178,10 +165,11 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        setEstadoTela(Estados.esAltera);
-        AlteraLogin altLog = new AlteraLogin();
-        altLog.setVisible(true);
-        this.setVisible(false);
+        if (Login.criaLogin()) {
+            AlteraLogin alt = new AlteraLogin();
+            alt.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     public static void main(String args[]) {
