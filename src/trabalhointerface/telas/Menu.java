@@ -1,16 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhointerface.telas;
 
-import javax.swing.JOptionPane;
-
-/**
- *
- * @author giobe
- */
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
@@ -36,6 +25,9 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
+        setMaximumSize(new java.awt.Dimension(666, 491));
+        setMinimumSize(new java.awt.Dimension(666, 491));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -128,7 +120,6 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,9 +141,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        Login login = new Login(this, true);
-        Cadastro cadastro = new Cadastro();
-        cadastro.setVisible(true);
+        Consulta consulta = new Consulta();
+        consulta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastroActionPerformed
 

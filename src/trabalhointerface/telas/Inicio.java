@@ -37,6 +37,9 @@ public class Inicio extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(613, 417));
+        setMinimumSize(new java.awt.Dimension(613, 417));
+        setResizable(false);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/star.png"))); // NOI18N
 

@@ -3,7 +3,6 @@ package trabalhointerface.telas;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import trabalhointerface.modelo.UsuarioDAO;
 import trabalhointerface.util.Validacao;
 
 public class Login extends javax.swing.JDialog {
@@ -28,6 +27,10 @@ public class Login extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
+        setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(400, 206));
+        setMinimumSize(new java.awt.Dimension(400, 206));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/user.png"))); // NOI18N
@@ -110,8 +113,6 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Menu menu = new Menu();
-        menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 

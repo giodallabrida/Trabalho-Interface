@@ -1,5 +1,6 @@
 package trabalhointerface.util;
 
+
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -23,12 +24,17 @@ public class Validacao {
         return true;
     }
 
-    public static boolean validaFloat(JTextField campo) {
+    public static boolean validaFloat(JTextField campo, int min, int max) {
         try {
             float valor = Float.valueOf(campo.getText());
-            return true;
+            if (valor <= min || valor >= max){
+                Mensagens.msgErro("Preço inválido.");
+                return false;
+            }else{
+                return true;
+            }
         } catch (Exception e){
-            Mensagens.msgErro(campo.getToolTipText());
+             Mensagens.msgErro("Preço inválido.");
             campo.requestFocus();
             return false;
         }

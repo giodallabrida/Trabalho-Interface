@@ -19,6 +19,9 @@ public class Relatorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Relatório de Vendas");
+        setMaximumSize(new java.awt.Dimension(758, 479));
+        setMinimumSize(new java.awt.Dimension(758, 479));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         jLabel1.setText("Relatório de Vendas");

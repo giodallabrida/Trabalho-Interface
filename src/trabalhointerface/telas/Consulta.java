@@ -27,7 +27,6 @@ public class Consulta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton4 = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -36,16 +35,21 @@ public class Consulta extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnAlterar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-
-        jButton4.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabalhointerface/telas/002-voltar.png"))); // NOI18N
+        Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consulta de Produtos");
+        setMaximumSize(new java.awt.Dimension(715, 523));
+        setMinimumSize(new java.awt.Dimension(715, 523));
+        setResizable(false);
 
         btnAdicionar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/add.png"))); // NOI18N
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         jLabel1.setText("Consulta de Produtos");
@@ -99,11 +103,11 @@ public class Consulta extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-voltar.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        Voltar.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
+        Voltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/002-voltar.png"))); // NOI18N
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                VoltarActionPerformed(evt);
             }
         });
 
@@ -132,7 +136,7 @@ public class Consulta extends javax.swing.JFrame {
                                 .addGap(69, 69, 69)
                                 .addComponent(btnRemover)
                                 .addGap(119, 119, 119)
-                                .addComponent(jButton5)
+                                .addComponent(Voltar)
                                 .addGap(7, 7, 7)))
                         .addGap(41, 41, 41))))
             .addGroup(layout.createSequentialGroup()
@@ -155,7 +159,7 @@ public class Consulta extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Voltar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -169,19 +173,24 @@ public class Consulta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         Menu menu = new Menu();
         menu.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_VoltarActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        Cadastro cadastro = new Cadastro();
+        cadastro.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Voltar;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
