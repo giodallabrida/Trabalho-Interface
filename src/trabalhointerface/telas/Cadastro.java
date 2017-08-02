@@ -1,37 +1,31 @@
 package trabalhointerface.telas;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import trabalhointerface.persistencia.ProdutoDAO;
 import trabalhointerface.util.Mensagens;
 import trabalhointerface.util.Validacao;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author giobe
- */
 public class Cadastro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cadastro
-     */
     public Cadastro() {
         initComponents();
     }
 
-    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO) {
+    private final ProdutoDAO produtoDAO = new ProdutoDAO();
+    
+    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) throws SQLException, FileNotFoundException {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
-            if (nomePDTO.getText().equals("Código do bd")) {
-                Mensagens.msgAviso(nomePDTO.getToolTipText());
+            if (produtoDAO.verificaNome(nomePDTO.getText())) {
+                Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
             } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101))) {
-                //cadastra o produto no bd 
+                produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
                 aux = true;
             } else {
                 precoPDTO.setText("");
@@ -41,6 +35,8 @@ public class Cadastro extends javax.swing.JFrame {
 
     }
 
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,7 +50,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         alteraIcone = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        icone = new javax.swing.JLabel();
+        iconeProduto = new javax.swing.JLabel();
         caminho = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -126,7 +122,7 @@ public class Cadastro extends javax.swing.JFrame {
                                 .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(icone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(iconeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(22, 22, 22)
@@ -158,7 +154,7 @@ public class Cadastro extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(icone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -180,17 +176,23 @@ public class Cadastro extends javax.swing.JFrame {
         if (arquivos.verificaAcao()) {
             String arquivoSelecionado = arquivos.getSelected();
             caminho.setText(arquivoSelecionado);
-            icone.setIcon(new javax.swing.ImageIcon(arquivoSelecionado));
+            iconeProduto.setIcon(new javax.swing.ImageIcon(arquivoSelecionado));
         }
     }//GEN-LAST:event_alteraIconeActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (cadastraProduto(nomeProduto, precoProduto)) {
-            Mensagens.msgInfo("Produto adicionado com sucesso.");
-            Menu menu = new Menu();
-            menu.setVisible(true);
-            this.setVisible(false);
-        } 
+        try {
+            if (cadastraProduto(nomeProduto, precoProduto, caminho)) {
+                Mensagens.msgInfo("Produto adicionado com sucesso.");
+                Menu menu = new Menu();
+                menu.setVisible(true);
+                this.setVisible(false); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -205,7 +207,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel caminho;
-    private javax.swing.JLabel icone;
+    private javax.swing.JLabel iconeProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

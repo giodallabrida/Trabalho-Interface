@@ -1,4 +1,4 @@
-package trabalhointerface.persistencia;
+package trabalhointerface.modelo;
 
 public class UsuarioDTO {
     private String user, senha;

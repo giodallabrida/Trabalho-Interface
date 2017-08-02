@@ -1,8 +1,12 @@
 package trabalhointerface.telas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import trabalhointerface.persistencia.UsuarioDAO;
 import trabalhointerface.util.Validacao;
 
 public class Login extends javax.swing.JDialog {
@@ -108,7 +112,11 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        autenticado = fazLogin(userUsuario, senhaUsuario);
+        try {
+            autenticado = fazLogin(userUsuario, senhaUsuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -122,13 +130,13 @@ public class Login extends javax.swing.JDialog {
         return login.autenticado;
     }
 
-    public boolean fazLogin(JTextField user, JPasswordField senha) {
+    public boolean fazLogin(JTextField user, JPasswordField senha) throws SQLException {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
-            if (user.getText().equals("juca")
-                    && String.copyValueOf(senha.getPassword()).equals("juca")) {
+            if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
                 // chamar o menu principal...
                 aux = true;
             } else {

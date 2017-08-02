@@ -5,9 +5,13 @@
  */
 package trabalhointerface.telas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import trabalhointerface.persistencia.UsuarioDAO;
 import trabalhointerface.util.Mensagens;
 import trabalhointerface.util.Validacao;
 
@@ -24,12 +28,13 @@ public class AlteraLogin extends javax.swing.JFrame {
         initComponents();
     }
 
-    public boolean alteraLogin(JTextField user, JPasswordField senha) {
+    public boolean alteraLogin(JTextField user, JPasswordField senha) throws SQLException {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
-            //alterar no bd
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
             aux = true;
         }
         return aux;
@@ -140,14 +145,18 @@ public class AlteraLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (alteraLogin(novoUsuario, novaSenha)) {
-            Mensagens.msgInfo("Login alterado com sucesso.");
-            Menu menu = new Menu();
-            menu.setVisible(true);
-            this.setVisible(false);
-        }else{
-            novoUsuario.setText("");
-            novaSenha.setText("");
+        try {
+            if (alteraLogin(novoUsuario, novaSenha)) {
+                Mensagens.msgInfo("Login alterado com sucesso.");
+                Menu menu = new Menu();
+                menu.setVisible(true);
+                this.setVisible(false);
+            }else{
+                novoUsuario.setText("");
+                novaSenha.setText("");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AlteraLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnSalvarActionPerformed

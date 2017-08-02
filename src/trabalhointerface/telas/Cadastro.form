@@ -53,7 +53,7 @@
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="icone" max="32767" attributes="0"/>
+                                      <Component id="iconeProduto" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="caminho" min="-2" pref="146" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="icone" min="-2" pref="71" max="-2" attributes="0"/>
+                      <Component id="iconeProduto" min="-2" pref="71" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -199,7 +199,7 @@
         <Property name="text" type="java.lang.String" value="&#xcd;cone"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="icone">
+    <Component class="javax.swing.JLabel" name="iconeProduto">
     </Component>
     <Component class="javax.swing.JLabel" name="caminho">
     </Component>

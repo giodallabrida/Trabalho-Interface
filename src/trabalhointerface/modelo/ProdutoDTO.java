@@ -1,16 +1,18 @@
-package trabalhointerface.persistencia;
+package trabalhointerface.modelo;
+
+import java.awt.Image;
 
 public class ProdutoDTO {
-    private int codigo;
+    private Image icone;
     private String nome;
     private float preco;
 
-    public int getCodigo() {
-        return codigo;
+    public Image getIcone() {
+        return icone;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setIcone(Image icone) {
+        this.icone = icone;
     }
 
     public String getNome() {
@@ -29,9 +31,9 @@ public class ProdutoDTO {
         this.preco = preco;
     }
 
-    public ProdutoDTO(int codigo, String nome, float preco) {
-        this.codigo = codigo;
+    public ProdutoDTO(String nome, float preco, Image icone) {
         this.nome = nome;
         this.preco = preco;
+        this.icone = icone;
     }
 }
