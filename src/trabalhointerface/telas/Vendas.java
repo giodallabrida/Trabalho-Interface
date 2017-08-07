@@ -17,6 +17,7 @@ public class Vendas extends javax.swing.JFrame {
         // posições nos eixos X e Y de cada botão...
         int posX = 100;
         int posY = 100;
+        
         for (int i = 1; i <= 10; i++) {
             // criação do botão e definição do texto que será apresentado nele.
             JButton botao = new JButton();

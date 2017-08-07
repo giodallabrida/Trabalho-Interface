@@ -1,9 +1,18 @@
 package trabalhointerface.telas;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import trabalhointerface.modelo.ProdutoDTO;
+import trabalhointerface.persistencia.ProdutoDAO;
+
 public class Consulta extends javax.swing.JFrame {
 
-    public Consulta() {
+    public Consulta() throws SQLException, IOException {
+        this.listaProdutos = pdtoDAO.carregaProdutos();
         initComponents();
+        carregaProdutos();
         this.setLocationRelativeTo(null);
     }
 
@@ -15,7 +24,7 @@ public class Consulta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         btnAlterar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
@@ -24,9 +33,7 @@ public class Consulta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consulta de Produtos");
-        setMaximumSize(new java.awt.Dimension(715, 523));
         setMinimumSize(new java.awt.Dimension(715, 523));
-        setPreferredSize(new java.awt.Dimension(632, 628));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -42,8 +49,8 @@ public class Consulta extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -75,11 +82,11 @@ public class Consulta extends javax.swing.JFrame {
                 "Produto", "Preço"
             }
         ));
-        jTable1.setEnabled(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Produto");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Preço");
+        tabela.setEnabled(false);
+        jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setHeaderValue("Produto");
+            tabela.getColumnModel().getColumn(1).setHeaderValue("Preço");
         }
 
         btnAlterar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
@@ -195,6 +202,27 @@ public class Consulta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    ProdutoDAO pdtoDAO = new ProdutoDAO();
+    ArrayList<ProdutoDTO> listaProdutos;
+
+    public void carregaProdutos() {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        };
+        modelo.addColumn("Nome");
+        modelo.addColumn("Preço");
+        for (ProdutoDTO pdto : listaProdutos) {
+            modelo.addRow(pdto.getLinhaTabela());
+
+        }
+
+        tabela.setModel(modelo);
+        tabela.setAutoResizeMode(0);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Voltar;
@@ -206,6 +234,6 @@ public class Consulta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

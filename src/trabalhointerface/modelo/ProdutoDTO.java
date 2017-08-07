@@ -30,6 +30,11 @@ public class ProdutoDTO {
     public void setPreco(float preco) {
         this.preco = preco;
     }
+    
+    public String[] getLinhaTabela(){
+        String[] retorno = {(this.nome), String.valueOf(this.preco), String.valueOf(this.icone)};
+        return retorno;
+    }
 
     public ProdutoDTO(String nome, float preco, Image icone) {
         this.nome = nome;
