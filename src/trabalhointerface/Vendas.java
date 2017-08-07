@@ -3,7 +3,6 @@ package trabalhointerface;
 import trabalhointerface.telas.Inicio;
 
 public class Vendas {
-
     /*
     Script BD:
     
@@ -44,7 +43,8 @@ CREATE TABLE VENDA_PRODUTO (
     
     public static void main(String[] args) {
         Inicio inicio = new Inicio();
-        inicio.setVisible(true);   
+        inicio.setVisible(true); 
+        System.out.println("");
     }
     
 }
