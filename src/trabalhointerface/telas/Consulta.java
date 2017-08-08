@@ -1,7 +1,5 @@
 package trabalhointerface.telas;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import trabalhointerface.modelo.ProdutoDTO;
@@ -9,7 +7,7 @@ import trabalhointerface.persistencia.ProdutoDAO;
 
 public class Consulta extends javax.swing.JFrame {
 
-    public Consulta() throws SQLException, IOException {
+    public Consulta(){
         this.listaProdutos = pdtoDAO.carregaProdutos();
         initComponents();
         carregaProdutos();

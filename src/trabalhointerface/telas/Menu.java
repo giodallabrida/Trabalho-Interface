@@ -1,10 +1,5 @@
 package trabalhointerface.telas;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
@@ -157,14 +152,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         Consulta consulta = null;
-        try {
-            consulta = new Consulta();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        consulta = new Consulta();
         consulta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastroActionPerformed

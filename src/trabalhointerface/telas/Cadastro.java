@@ -1,9 +1,5 @@
 package trabalhointerface.telas;
 
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import trabalhointerface.persistencia.ProdutoDAO;
@@ -19,7 +15,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) throws SQLException, FileNotFoundException {
+    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO){
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
@@ -193,23 +189,18 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_alteraIconeActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Consulta consulta = new Consulta();
+        Consulta consulta = null;
+        consulta = new Consulta();
         consulta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        try {
-            if (cadastraProduto(nomeProduto, precoProduto, caminho)) {
-                Mensagens.msgInfo("Produto adicionado com sucesso.");
-                Consulta consulta = new Consulta();
-                consulta.setVisible(true);
-                this.setVisible(false);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        if (cadastraProduto(nomeProduto, precoProduto, caminho)) {
+            Mensagens.msgInfo("Produto adicionado com sucesso.");
+            Consulta consulta = new Consulta();
+            consulta.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

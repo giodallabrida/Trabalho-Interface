@@ -132,16 +132,12 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
-            autenticado = fazLogin(userUsuario, senhaUsuario);
-            if(autenticado){
-                this.dispose();    
-            }else{
-                userUsuario.setText("");
-                senhaUsuario.setText("");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        autenticado = fazLogin(userUsuario, senhaUsuario);
+        if(autenticado){
+            this.dispose();
+        }else{
+            userUsuario.setText("");
+            senhaUsuario.setText("");
         }
         
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -160,17 +156,21 @@ public class Login extends javax.swing.JDialog {
         return login.autenticado;
     }
 
-    public boolean fazLogin(JTextField user, JPasswordField senha) throws SQLException {
+    public boolean fazLogin(JTextField user, JPasswordField senha){
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
-            if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
-                // chamar o menu principal...
-                aux = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
+                    // chamar o menu principal...
+                    aux = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
      }
         return aux;

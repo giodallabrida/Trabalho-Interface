@@ -2,8 +2,6 @@ package trabalhointerface.telas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import trabalhointerface.modelo.ProdutoDTO;
@@ -15,8 +13,8 @@ public class Vendas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public void criaBotoes() throws SQLException, IOException{
+
+    public void criaBotoes() {
         // TODO add your handling code here:
 
         // posições nos eixos X e Y de cada botão...
@@ -24,7 +22,7 @@ public class Vendas extends javax.swing.JFrame {
         int posY = 100;
 
         ProdutoDAO produto = new ProdutoDAO();
-        ArrayList <ProdutoDTO> listaProdutos = produto.carregaProdutos();
+        ArrayList<ProdutoDTO> listaProdutos = produto.carregaProdutos();
         for (ProdutoDTO pdto : listaProdutos) {
             JButton botao = new JButton();
             
@@ -57,15 +55,13 @@ public class Vendas extends javax.swing.JFrame {
             
         }
         this.repaint();
+    }
 
-        }
-        
-    
-     private void processaPressionamentoBotao(ActionEvent e) {
+    private void processaPressionamentoBotao(ActionEvent e) {
         if (e.getActionCommand().equals("1")) {
             this.setTitle("Você não pode clicar nesse botão");
         } else {
-            this.setTitle("Você clicou em um botão válido: "  + e.getActionCommand());
+            this.setTitle("Você clicou em um botão válido: " + e.getActionCommand());
         }
     }
 

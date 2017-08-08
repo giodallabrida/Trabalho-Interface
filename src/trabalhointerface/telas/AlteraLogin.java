@@ -16,13 +16,17 @@ public class AlteraLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public boolean alteraLogin(JTextField user, JPasswordField senha) throws SQLException {
+    public boolean alteraLogin(JTextField user, JPasswordField senha){
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
+            try {
+                usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
+            } catch (SQLException ex) {
+                Logger.getLogger(AlteraLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
             aux = true;
         }
         return aux;
@@ -139,18 +143,14 @@ public class AlteraLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        try {
-            if (alteraLogin(novoUsuario, novaSenha)) {
-                Mensagens.msgInfo("Login alterado com sucesso.");
-                Menu menu = new Menu();
-                menu.setVisible(true);
-                this.setVisible(false);
-            }else{
-                novoUsuario.setText("");
-                novaSenha.setText("");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlteraLogin.class.getName()).log(Level.SEVERE, null, ex);
+        if (alteraLogin(novoUsuario, novaSenha)) {
+            Mensagens.msgInfo("Login alterado com sucesso.");
+            Menu menu = new Menu();
+            menu.setVisible(true);
+            this.setVisible(false);
+        }else{
+            novoUsuario.setText("");
+            novaSenha.setText("");
         }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
