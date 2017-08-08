@@ -89,11 +89,11 @@ public class ProdutoDAO {
         return listaPDTO;
     }
 
-    private Image blobToImage(Blob blob) throws SQLException, IOException {
+    private ImageIcon blobToImage(Blob blob) throws SQLException, IOException {
         byte[] imagebytes = blob.getBytes(1, (int) blob.length());
         BufferedImage imagemBuff = ImageIO.read(new ByteArrayInputStream(imagebytes));
         ImageIcon imagem = new ImageIcon(new ImageIcon(imagemBuff).getImage().getScaledInstance(136, 135, Image.SCALE_DEFAULT));
-        return imagem.getImage();
+        return imagem;
     }
 
 }

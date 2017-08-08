@@ -1,17 +1,18 @@
 package trabalhointerface.modelo;
 
 import java.awt.Image;
+import javax.swing.ImageIcon;
 
 public class ProdutoDTO {
-    private Image icone;
+    private ImageIcon icone;
     private String nome;
     private float preco;
 
-    public Image getIcone() {
+    public ImageIcon getIcone() {
         return icone;
     }
 
-    public void setIcone(Image icone) {
+    public void setIcone(ImageIcon icone) {
         this.icone = icone;
     }
 
@@ -36,7 +37,7 @@ public class ProdutoDTO {
         return retorno;
     }
 
-    public ProdutoDTO(String nome, float preco, Image icone) {
+    public ProdutoDTO(String nome, float preco, ImageIcon icone) {
         this.nome = nome;
         this.preco = preco;
         this.icone = icone;

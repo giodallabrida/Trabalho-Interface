@@ -216,7 +216,6 @@ public class Consulta extends javax.swing.JFrame {
         modelo.addColumn("Preço");
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
-
         }
 
         tabela.setModel(modelo);
