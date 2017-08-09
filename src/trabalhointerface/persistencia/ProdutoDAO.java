@@ -93,11 +93,11 @@ public class ProdutoDAO {
         Connection conn;
         try {
             conn = DriverManager.getConnection(str);
-            String sql = "select NOM_PDTO, PRECO_PDTO, ICON_PDTO from Produto";
+            String sql = "select COD_PDTO, NOM_PDTO, PRECO_PDTO, ICON_PDTO from Produto";
             PreparedStatement p = conn.prepareStatement(sql);
             ResultSet rs = p.executeQuery();
             while (rs.next()) {
-                ProdutoDTO pp = new ProdutoDTO(rs.getString(1), rs.getFloat(2), blobToImage(rs.getBlob(3)));
+                ProdutoDTO pp = new ProdutoDTO(rs.getInt(1), rs.getString(2), rs.getFloat(3), blobToImage(rs.getBlob(4)));
                 listaPDTO.add(pp);
             }
         } catch (SQLException ex) {

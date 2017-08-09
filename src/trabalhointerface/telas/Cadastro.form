@@ -179,6 +179,9 @@
         <Component class="javax.swing.JLabel" name="iconeProduto">
         </Component>
         <Component class="javax.swing.JLabel" name="caminho">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Adicione um &#xed;cone ao produto."/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="alteraIcone">
           <Properties>

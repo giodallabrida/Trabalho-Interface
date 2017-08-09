@@ -22,11 +22,7 @@ public class AlteraLogin extends javax.swing.JFrame {
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            try {
-                usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
-            } catch (SQLException ex) {
-                Logger.getLogger(AlteraLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
             aux = true;
         }
         return aux;

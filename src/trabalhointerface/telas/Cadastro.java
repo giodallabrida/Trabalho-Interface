@@ -15,13 +15,13 @@ public class Cadastro extends javax.swing.JFrame {
 
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO){
+    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
             if (produtoDAO.verificaNome(nomePDTO.getText())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
-            } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101))) {
+            } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (Validacao.validaIcone(iconePDTO))) {
                 produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
                 aux = true;
             } else {
@@ -29,7 +29,6 @@ public class Cadastro extends javax.swing.JFrame {
             }
         }
         return aux;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -72,6 +71,8 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         jLabel4.setText("Ícone");
+
+        caminho.setToolTipText("Adicione um ícone ao produto.");
 
         alteraIcone.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
         alteraIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/magnifier.png"))); // NOI18N

@@ -12,27 +12,37 @@ public class Vendas extends javax.swing.JFrame {
     public Vendas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        criaBotoes();
     }
 
+    public Object[][] mprodutos = null;
+
     public void criaBotoes() {
-        // TODO add your handling code here:
 
         // posições nos eixos X e Y de cada botão...
-        int posX = 100;
-        int posY = 100;
+        int posX = 50;
+        int posY = 50;
 
         ProdutoDAO produto = new ProdutoDAO();
         ArrayList<ProdutoDTO> listaProdutos = produto.carregaProdutos();
+        mprodutos = new Object[listaProdutos.size()][2];
+        int linha = 0;
         for (ProdutoDTO pdto : listaProdutos) {
             JButton botao = new JButton();
-            
+            botao.setName(String.valueOf(pdto.getCodigo()));
+            mprodutos[linha][0] = botao;
+            mprodutos[linha][1] = pdto;
+            linha++;
             botao.setText("0");
             botao.setToolTipText(pdto.getNome() + " - R$ " + pdto.getPreco());
+            botao.setBounds(posX, posY, 135, 60);
             botao.setIcon(pdto.getIcone());
+            
             // o método setBounds serve para definir a posição nos eixos x e y, além
             // da largura e altura do botão.
-            botao.setBounds(posX, posY, 100, 20);
+           
             botao.setVisible(true);
+            
             // adicionar um ActionListener em um controle permite que o programa
             // possa responder a eventos específicos. o ActionListener adicionado
             // desvia a execução do código para o método "processaPressionamentoBotao()"
@@ -43,26 +53,25 @@ public class Vendas extends javax.swing.JFrame {
                     processaPressionamentoBotao(e);
                 }
             });
+
+            
             
             // o botão criado acima precisa ser adicionado ao JFrame (isso não é feito
             // de modo automático).
             // this = JFrame. getContentPane() = método para acessar o container de controles do JFrame.
-            this.getContentPane().add(botao);
-            
+            painel.add(botao);
+
             // incrementa a posição no eixo Y para evitar a sobreposição dos botões.
             posY += 30;
             painel.add(botao);
-            
+
         }
         this.repaint();
     }
 
     private void processaPressionamentoBotao(ActionEvent e) {
-        if (e.getActionCommand().equals("1")) {
-            this.setTitle("Você não pode clicar nesse botão");
-        } else {
-            this.setTitle("Você clicou em um botão válido: " + e.getActionCommand());
-        }
+        JButton botao = (JButton) e.getSource();
+        botao.setText(String.valueOf(Integer.valueOf(botao.getText()) + 1));
     }
 
     @SuppressWarnings("unchecked")
@@ -79,12 +88,18 @@ public class Vendas extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
         painel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
-        setMaximumSize(new java.awt.Dimension(758, 479));
         setMinimumSize(new java.awt.Dimension(758, 479));
-        setPreferredSize(new java.awt.Dimension(758, 479));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 204));
@@ -114,16 +129,78 @@ public class Vendas extends javax.swing.JFrame {
         });
 
         painel.setBackground(new java.awt.Color(153, 255, 204));
+        painel.setMaximumSize(new java.awt.Dimension(692, 0));
+        painel.setMinimumSize(new java.awt.Dimension(692, 0));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton1.setText("  0");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton2.setText("  0");
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton3.setText("  0");
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton4.setText("  0");
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton5.setText("  0");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton6.setText("  0");
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton7.setText("  0");
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/hot-dog.png"))); // NOI18N
+        jButton8.setText("  0");
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
+            .addGroup(painelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGroup(painelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -136,7 +213,7 @@ public class Vendas extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jSeparator1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addContainerGap(19, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSeparator2)
                             .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -167,10 +244,10 @@ public class Vendas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +288,14 @@ public class Vendas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEncerra;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
@@ -220,4 +305,5 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel painel;
     // End of variables declaration//GEN-END:variables
+
 }

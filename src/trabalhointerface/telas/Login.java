@@ -162,15 +162,11 @@ public class Login extends javax.swing.JDialog {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         if (Validacao.validaCampo(user)
                 && Validacao.validaSenha(senha)) {
-            try {
-                if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
-                    // chamar o menu principal...
-                    aux = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
+                // chamar o menu principal...
+                aux = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
             }
      }
         return aux;

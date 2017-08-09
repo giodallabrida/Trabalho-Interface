@@ -1,6 +1,10 @@
 package trabalhointerface.telas;
 
 import java.util.ArrayList;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.persistencia.ProdutoDAO;
@@ -210,11 +214,36 @@ public class Consulta extends javax.swing.JFrame {
                 return false;
             }
         };
+        modelo.addColumn("Código");
         modelo.addColumn("Nome");
         modelo.addColumn("Preço");
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
         }
+         // alinhamento das colunas...
+        DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer alinhamentoDireita = new DefaultTableCellRenderer();
+        alinhamentoEsquerda.setHorizontalAlignment(SwingConstants.LEFT);
+        alinhamentoDireita.setHorizontalAlignment(SwingConstants.RIGHT);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(alinhamentoDireita);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoEsquerda);
+
+        // definição da largura das colunas...
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(050);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(150);
+
+        // sobrescreve o método valueChanged para identificar qual é a linha
+        // que está selecionada e carregar os dados da tabela para os TextFields.
+        tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent evt) {
+                if (evt.getValueIsAdjusting()) {
+                    return;
+                }
+                int linhaSelecionada = tabela.getSelectedRow();
+
+            }
+        });
 
         tabela.setModel(modelo);
         tabela.setAutoResizeMode(0);
