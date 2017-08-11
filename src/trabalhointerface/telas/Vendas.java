@@ -20,7 +20,7 @@ public class Vendas extends javax.swing.JFrame {
     public void criaBotoes() {
 
         // posições nos eixos X e Y de cada botão...
-        int posX = 50;
+        int posX = 42;
         int posY = 50;
 
         ProdutoDAO produto = new ProdutoDAO();

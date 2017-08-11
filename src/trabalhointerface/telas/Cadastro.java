@@ -2,14 +2,25 @@ package trabalhointerface.telas;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.persistencia.ProdutoDAO;
 import trabalhointerface.util.Mensagens;
 import trabalhointerface.util.Validacao;
 
 public class Cadastro extends javax.swing.JFrame {
 
-    public Cadastro() {
+    private final boolean modoInclusao;
+    private final ProdutoDTO produto;
+
+    public Cadastro(boolean modoInclusao, ProdutoDTO produto) {
+        this.modoInclusao = modoInclusao;
+        this.produto = produto;
         initComponents();
+        if (modoInclusao == false) {
+            nomeProduto.setText(produto.getNome());
+            precoProduto.setText(String.valueOf(produto.getPreco()));
+            iconeProduto.setIcon(produto.getIcone());
+        }
         this.setLocationRelativeTo(null);
     }
 
@@ -19,10 +30,14 @@ public class Cadastro extends javax.swing.JFrame {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
-            if (produtoDAO.verificaNome(nomePDTO.getText())) {
+            if (produtoDAO.verificaNome(nomePDTO.getText(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
             } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (Validacao.validaIcone(iconePDTO))) {
-                produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
+                if (modoInclusao) {
+                    produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
+                } else {
+                    produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getText(), produto.getCodigo());
+                }
                 aux = true;
             } else {
                 precoPDTO.setText("");

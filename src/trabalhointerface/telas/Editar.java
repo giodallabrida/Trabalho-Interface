@@ -1,9 +1,22 @@
 package trabalhointerface.telas;
 
+import trabalhointerface.modelo.ProdutoDTO;
+import trabalhointerface.persistencia.ProdutoDAO;
+import trabalhointerface.util.Mensagens;
+import trabalhointerface.util.Validacao;
+
 public class Editar extends javax.swing.JFrame {
 
-    public Editar() {
+    private final ProdutoDTO produtoDTO;
+
+    public Editar(ProdutoDTO cod) {
         initComponents();
+        this.produtoDTO = cod;
+        nomeProduto.setText(cod.getNome());
+        precoProduto.setText(String.valueOf(cod.getPreco()));
+        iconeProduto.setIcon(cod.getIcone());
+        caminho.setText(cod.getIcone().toString());
+        alteraProduto();
     }
 
     @SuppressWarnings("unchecked")
@@ -20,10 +33,14 @@ public class Editar extends javax.swing.JFrame {
         alteraIcone = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        iconeProduto = new javax.swing.JLabel();
+        caminho = new javax.swing.JLabel();
+        codigoProduto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        painel.setForeground(new java.awt.Color(153, 255, 153));
+        painel.setBackground(new java.awt.Color(153, 255, 204));
+        painel.setForeground(new java.awt.Color(255, 255, 255));
 
         nomeTela.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         nomeTela.setText("Alterar Produto");
@@ -65,6 +82,11 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
+        caminho.setToolTipText("Adicione um ícone ao produto.");
+
+        codigoProduto.setText("jLabel1");
+        codigoProduto.setEnabled(false);
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -75,10 +97,19 @@ public class Editar extends javax.swing.JFrame {
                 .addGap(144, 144, 144))
             .addGroup(painelLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(icone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(alteraIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(codigoProduto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(icone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(alteraIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))))
             .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelLayout.createSequentialGroup()
                     .addGap(36, 36, 36)
@@ -104,13 +135,22 @@ public class Editar extends javax.swing.JFrame {
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(nomeTela)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(icone)
-                    .addComponent(alteraIcone))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(nomeTela)
+                        .addGap(18, 18, 18)
+                        .addComponent(codigoProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(icone)
+                            .addComponent(alteraIcone))))
                 .addGap(123, 123, 123))
             .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelLayout.createSequentialGroup()
@@ -155,14 +195,36 @@ public class Editar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        Consulta consulta = null;
+        consulta = new Consulta();
+        consulta.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    ProdutoDAO pdto = new ProdutoDAO();
+
+    public boolean alteraProduto() {
+        // validar nome de usuário e senha - não vazios...
+        boolean aux = false;
+        if (Validacao.validaCampo(nomeProduto)) {
+            if (pdto.verificaNome(nomeProduto.getText().toLowerCase())) {
+                Mensagens.msgAviso("Há um produto de mesmo nome cadastrado.");
+            } else if (Validacao.validaCampo(precoProduto) && (Validacao.validaFloat(precoProduto, 0, 101)) && (Validacao.validaIcone(iconeProduto))) {
+                pdto.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getText(), produtoDTO.getCodigo());
+                aux = true;
+            }
+        }
+        return aux;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alteraIcone;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel caminho;
+    private javax.swing.JLabel codigoProduto;
     private javax.swing.JLabel icone;
+    private javax.swing.JLabel iconeProduto;
     private javax.swing.JTextField nomeProduto;
     private javax.swing.JLabel nomeTela;
     private javax.swing.JPanel painel;

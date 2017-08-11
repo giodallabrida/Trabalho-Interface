@@ -1,20 +1,19 @@
 package trabalhointerface.telas;
 
 import java.util.ArrayList;
-import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.persistencia.ProdutoDAO;
+import trabalhointerface.util.Mensagens;
 
 public class Consulta extends javax.swing.JFrame {
 
-    public Consulta(){
+    public Consulta() {
         this.listaProdutos = pdtoDAO.carregaProdutos();
         initComponents();
-        carregaProdutos();
+        if (listaProdutos != null) {
+            carregaProdutos();
+        }
         this.setLocationRelativeTo(null);
     }
 
@@ -41,6 +40,7 @@ public class Consulta extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Consulta de Produtos");
 
         btnAdicionar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
@@ -84,7 +84,6 @@ public class Consulta extends javax.swing.JFrame {
                 "Produto", "Preço"
             }
         ));
-        tabela.setEnabled(false);
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setHeaderValue("Produto");
@@ -94,6 +93,11 @@ public class Consulta extends javax.swing.JFrame {
         btnAlterar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnRemover.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cancel-mark.png"))); // NOI18N
@@ -124,41 +128,41 @@ public class Consulta extends javax.swing.JFrame {
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(98, 98, 98)
-                                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Voltar)
-                                        .addGap(7, 7, 7))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(11, 11, 11))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(237, 237, 237)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 60, Short.MAX_VALUE)))
+                        .addGap(163, 163, 163)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(Voltar)
+                        .addGap(0, 67, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Voltar)
@@ -172,17 +176,13 @@ public class Consulta extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -199,10 +199,22 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        Cadastro cadastro = new Cadastro();
+        Cadastro cadastro = new Cadastro(true, new ProdutoDTO());
         cadastro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        int linhaSelecionada = tabela.getSelectedRow();
+        if (linhaSelecionada > -1) {
+            ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
+            Cadastro cadastro = new Cadastro(false, codigo);
+            cadastro.setVisible(true);
+            this.setVisible(false);
+        }else{
+            Mensagens.msgAviso("Selecione um produto a ser alterada!");
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     ProdutoDAO pdtoDAO = new ProdutoDAO();
     ArrayList<ProdutoDTO> listaProdutos;
@@ -220,8 +232,8 @@ public class Consulta extends javax.swing.JFrame {
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
         }
-         // alinhamento das colunas...
-        DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
+        // alinhamento das colunas...
+        /* DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
         DefaultTableCellRenderer alinhamentoDireita = new DefaultTableCellRenderer();
         alinhamentoEsquerda.setHorizontalAlignment(SwingConstants.LEFT);
         alinhamentoDireita.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -229,13 +241,15 @@ public class Consulta extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoEsquerda);
 
         // definição da largura das colunas...
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(050);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(50);
 
         // sobrescreve o método valueChanged para identificar qual é a linha
         // que está selecionada e carregar os dados da tabela para os TextFields.
         tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
+           
+         @Override
             public void valueChanged(ListSelectionEvent evt) {
                 if (evt.getValueIsAdjusting()) {
                     return;
@@ -244,7 +258,7 @@ public class Consulta extends javax.swing.JFrame {
 
             }
         });
-
+         */
         tabela.setModel(modelo);
         tabela.setAutoResizeMode(0);
     }

@@ -8,6 +8,13 @@ public class ProdutoDTO {
     private String nome;
     private float preco;
 
+    public ProdutoDTO() {
+        this.codigo = 0;
+        this.nome = "";
+        this.icone = null;
+        this.preco = 0;
+    }
+
     public ImageIcon getIcone() {
         return icone;
     }
@@ -40,9 +47,14 @@ public class ProdutoDTO {
         this.preco = preco;
     }
     
-    public String[] getLinhaTabela(){
-        String[] retorno = {String.valueOf(this.codigo),(this.nome), String.valueOf(this.preco), String.valueOf(this.icone)};
+    public Object[] getLinhaTabela(){
+        Object[] retorno = {String.valueOf(this.codigo), this, String.valueOf(this.preco)};
         return retorno;
+    }
+    
+    @Override
+    public String toString(){
+        return nome;
     }
 
     public ProdutoDTO(int codigo, String nome, float preco, ImageIcon icone) {

@@ -32,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/van.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Baskerville Old Face", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("FAT TRUCK");
 
         jPanel1.setBackground(new java.awt.Color(204, 0, 0));

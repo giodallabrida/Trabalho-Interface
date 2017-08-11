@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import trabalhointerface.modelo.ProdutoDTO;
+import trabalhointerface.util.Mensagens;
 
 public class ProdutoDAO {
 
@@ -55,32 +56,58 @@ public class ProdutoDAO {
 
          */
     }
+    
+    public void alteraProdutoBD(String nomePDTO, Float precoPDTO, String iconePDTO, int codigo) {
+        File file = new File(iconePDTO);
+        FileInputStream fileSream;
+        try {
+            fileSream = new FileInputStream(file);
+            String str = "jdbc:mysql://localhost:3307/fat_truck?"
+                    + "user=root&password=root";
+            // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
+            Connection conn = DriverManager.getConnection(str);
+            String sql = "update produto set NOM_PDTO = ?, PRECO_PDTO = ?, ICON_PDTO = ?"
+                    + "WHERE COD_PDTO = ?";
+            // enviar o select para ser analisado pelo banco
+            // de dados...
+            PreparedStatement p = conn.prepareStatement(sql);
+            // definir o valor de cada um dos parâmetros...
+            p.setString(1, nomePDTO);
+            p.setFloat(2, precoPDTO);
+            p.setBinaryStream(3, fileSream, (int) file.length());
+            p.setInt(4, codigo);
+            p.execute();
+        } catch (FileNotFoundException | SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void removeProduto() {
 
     }
 
-    public void editaProduto() {
+   
+    
 
-    }
-
-    public boolean verificaNome(String nome) {
+    public boolean verificaNome(String nome, int cod) {
         boolean aux = false;
         String str = "jdbc:mysql://localhost:3307/FAT_TRUCK?"
                 + "user=root&password=root";
         Connection conn;
         try {
             conn = DriverManager.getConnection(str);
-            String sql = "select NOM_PDTO from Produto "
-                    + " where NOM_PDTO = ? ";
+            String sql = "select lower(NOM_PDTO) from Produto "
+                    + " where NOM_PDTO = ? "
+                    + " and COD_PDTO <> ?";
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, nome);
+            p.setInt(2, cod);
             ResultSet rs = p.executeQuery();
             if (rs.next()) {
                 aux = true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Mensagens.msgErro("Ocorreu um erro.");
         }
 
         return aux;
@@ -112,7 +139,7 @@ public class ProdutoDAO {
         try {
             imagebytes = blob.getBytes(1, (int) blob.length());
             BufferedImage imagemBuff = ImageIO.read(new ByteArrayInputStream(imagebytes));
-            imagem = new ImageIcon(new ImageIcon(imagemBuff).getImage().getScaledInstance(136, 135, Image.SCALE_DEFAULT));
+            imagem = new ImageIcon(new ImageIcon(imagemBuff).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
 
         } catch (SQLException | IOException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
