@@ -54,41 +54,37 @@ public class Consulta extends javax.swing.JFrame {
         tabela.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Produto", "Preço"
+                "Código", "Produto", "Preço"
             }
         ));
         jScrollPane1.setViewportView(tabela);
-        if (tabela.getColumnModel().getColumnCount() > 0) {
-            tabela.getColumnModel().getColumn(0).setHeaderValue("Produto");
-            tabela.getColumnModel().getColumn(1).setHeaderValue("Preço");
-        }
 
         btnAlterar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
@@ -188,8 +184,22 @@ public class Consulta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ProdutoDAO dao = new ProdutoDAO();
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = tabela.getSelectedRow();
+        if (linhaSelecionada > -1) {
+            ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
+            if (dao.removeProdutoBD(codigo.getCodigo())) {
+                Mensagens.msgInfo("O produto foi removido com sucesso!");
+                Consulta consulta = new Consulta();
+                consulta.setVisible(true);
+                this.setVisible(false);
+            }else{
+                Mensagens.msgAviso("Ocorreu um erro ao remover o produto.");
+            }
+        } else {
+            Mensagens.msgAviso("Selecione um produto a ser alterada!");
+        }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
@@ -211,7 +221,7 @@ public class Consulta extends javax.swing.JFrame {
             Cadastro cadastro = new Cadastro(false, codigo);
             cadastro.setVisible(true);
             this.setVisible(false);
-        }else{
+        } else {
             Mensagens.msgAviso("Selecione um produto a ser alterada!");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed

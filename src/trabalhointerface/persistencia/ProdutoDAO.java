@@ -46,7 +46,7 @@ public class ProdutoDAO {
         } catch (FileNotFoundException | SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+
         //BD PARA ATRIBUTO
         /*
         Blob blob = rs.getBlob("binImagem");
@@ -56,7 +56,7 @@ public class ProdutoDAO {
 
          */
     }
-    
+
     public void alteraProdutoBD(String nomePDTO, Float precoPDTO, String iconePDTO, int codigo) {
         File file = new File(iconePDTO);
         FileInputStream fileSream;
@@ -67,7 +67,7 @@ public class ProdutoDAO {
             // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
             Connection conn = DriverManager.getConnection(str);
             String sql = "update produto set NOM_PDTO = ?, PRECO_PDTO = ?, ICON_PDTO = ?"
-                    + "WHERE COD_PDTO = ?";
+                    + "where COD_PDTO = ?";
             // enviar o select para ser analisado pelo banco
             // de dados...
             PreparedStatement p = conn.prepareStatement(sql);
@@ -82,12 +82,25 @@ public class ProdutoDAO {
         }
     }
 
-    public void removeProduto() {
-
+    public boolean removeProdutoBD(int codigo) {
+        boolean aux = false;
+        try {
+            String str = "jdbc:mysql://localhost:3307/fat_truck?"
+                    + "user=root&password=root";
+            Connection conn = DriverManager.getConnection(str);
+            String sql = "delete from produto where COD_PDTO = ?";
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setInt(1, codigo);
+            ResultSet rs = p.executeQuery();
+            if (rs.next()) {
+                aux = true;
+            }
+            p.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return aux;
     }
-
-   
-    
 
     public boolean verificaNome(String nome, int cod) {
         boolean aux = false;

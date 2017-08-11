@@ -12,6 +12,8 @@ public class Cadastro extends javax.swing.JFrame {
     private final boolean modoInclusao;
     private final ProdutoDTO produto;
 
+    //caminho.setText(cod.getIcone().toString());
+    
     public Cadastro(boolean modoInclusao, ProdutoDTO produto) {
         this.modoInclusao = modoInclusao;
         this.produto = produto;
@@ -27,7 +29,6 @@ public class Cadastro extends javax.swing.JFrame {
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
     public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) {
-        // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
             if (produtoDAO.verificaNome(nomePDTO.getText(), produto.getCodigo())) {
