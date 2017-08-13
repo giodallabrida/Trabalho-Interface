@@ -82,8 +82,7 @@ public class ProdutoDAO {
         }
     }
 
-    public boolean removeProdutoBD(int codigo) {
-        boolean aux = false;
+    public void removeProdutoBD(int codigo) {
         try {
             String str = "jdbc:mysql://localhost:3307/fat_truck?"
                     + "user=root&password=root";
@@ -91,15 +90,10 @@ public class ProdutoDAO {
             String sql = "delete from produto where COD_PDTO = ?";
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, codigo);
-            ResultSet rs = p.executeQuery();
-            if (rs.next()) {
-                aux = true;
-            }
-            p.executeQuery();
+            p.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return aux;
     }
 
     public boolean verificaNome(String nome, int cod) {

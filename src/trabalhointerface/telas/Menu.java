@@ -58,7 +58,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnRelatorio.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/paper-printer.png"))); // NOI18N
-        btnRelatorio.setText("   Relatório de Vendas");
+        btnRelatorio.setText("   Total Vendido");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioActionPerformed(evt);

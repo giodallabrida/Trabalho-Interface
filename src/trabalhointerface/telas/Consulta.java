@@ -189,14 +189,11 @@ public class Consulta extends javax.swing.JFrame {
         int linhaSelecionada = tabela.getSelectedRow();
         if (linhaSelecionada > -1) {
             ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
-            if (dao.removeProdutoBD(codigo.getCodigo())) {
-                Mensagens.msgInfo("O produto foi removido com sucesso!");
-                Consulta consulta = new Consulta();
-                consulta.setVisible(true);
-                this.setVisible(false);
-            }else{
-                Mensagens.msgAviso("Ocorreu um erro ao remover o produto.");
-            }
+            dao.removeProdutoBD(codigo.getCodigo());
+            Mensagens.msgInfo("O produto foi removido com sucesso!");
+            Consulta consulta = new Consulta();
+            consulta.setVisible(true);
+            this.setVisible(false);
         } else {
             Mensagens.msgAviso("Selecione um produto a ser alterada!");
         }
