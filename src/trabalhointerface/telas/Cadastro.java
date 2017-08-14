@@ -8,12 +8,11 @@ import trabalhointerface.util.Mensagens;
 import trabalhointerface.util.Validacao;
 
 public class Cadastro extends javax.swing.JFrame {
-
+    
     private final boolean modoInclusao;
     private final ProdutoDTO produto;
 
     //caminho.setText(cod.getIcone().toString());
-    
     public Cadastro(boolean modoInclusao, ProdutoDTO produto) {
         this.modoInclusao = modoInclusao;
         this.produto = produto;
@@ -25,28 +24,33 @@ public class Cadastro extends javax.swing.JFrame {
         }
         this.setLocationRelativeTo(null);
     }
-
+    
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
-
+    
     public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) {
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
             if (produtoDAO.verificaNome(nomePDTO.getText(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
-            } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (Validacao.validaIcone(iconePDTO))) {
+            } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(iconePDTO)))) {
                 if (modoInclusao) {
                     produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
                 } else {
                     produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getText(), produto.getCodigo());
                 }
                 aux = true;
-            } else {
+            }
+        } else {
+            if (modoInclusao) {
+                nomePDTO.setText("");
                 precoPDTO.setText("");
+                caminho.setText("");
+                iconePDTO.setIcon(null);
             }
         }
         return aux;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -214,7 +218,11 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (cadastraProduto(nomeProduto, precoProduto, caminho)) {
-            Mensagens.msgInfo("Produto adicionado com sucesso.");
+            if (modoInclusao) {
+                Mensagens.msgInfo("Produto adicionado com sucesso.");
+            } else {
+                Mensagens.msgInfo("Produto alterado com sucesso.");
+            }
             Consulta consulta = new Consulta();
             consulta.setVisible(true);
             this.setVisible(false);

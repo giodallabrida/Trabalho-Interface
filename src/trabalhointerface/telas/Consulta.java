@@ -195,7 +195,7 @@ public class Consulta extends javax.swing.JFrame {
             consulta.setVisible(true);
             this.setVisible(false);
         } else {
-            Mensagens.msgAviso("Selecione um produto a ser alterada!");
+            Mensagens.msgAviso("Selecione um produto a ser removido!");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
