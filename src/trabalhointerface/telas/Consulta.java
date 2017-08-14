@@ -1,6 +1,8 @@
 package trabalhointerface.telas;
 
 import java.util.ArrayList;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.persistencia.ProdutoDAO;
@@ -139,7 +141,7 @@ public class Consulta extends javax.swing.JFrame {
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
@@ -236,11 +238,19 @@ public class Consulta extends javax.swing.JFrame {
         modelo.addColumn("Código");
         modelo.addColumn("Nome");
         modelo.addColumn("Preço");
+        
+       
+        
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
+        
         }
-        // alinhamento das colunas...
-        /* DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
+        
+         tabela.setModel(modelo);
+        tabela.setAutoResizeMode(0);
+        
+         // alinhamento das colunas...
+        DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
         DefaultTableCellRenderer alinhamentoDireita = new DefaultTableCellRenderer();
         alinhamentoEsquerda.setHorizontalAlignment(SwingConstants.LEFT);
         alinhamentoDireita.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -248,13 +258,13 @@ public class Consulta extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoEsquerda);
 
         // definição da largura das colunas...
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(200);
 
         // sobrescreve o método valueChanged para identificar qual é a linha
         // que está selecionada e carregar os dados da tabela para os TextFields.
-        tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        /*tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
            
          @Override
             public void valueChanged(ListSelectionEvent evt) {
@@ -266,10 +276,7 @@ public class Consulta extends javax.swing.JFrame {
             }
         });
          */
-        tabela.setModel(modelo);
-        tabela.setAutoResizeMode(0);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Voltar;
