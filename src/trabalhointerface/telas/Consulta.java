@@ -86,7 +86,15 @@ public class Consulta extends javax.swing.JFrame {
                 "Código", "Produto", "Preço"
             }
         ));
+        tabela.setAutoscrolls(false);
+        tabela.getTableHeader().setResizingAllowed(false);
+        tabela.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnAlterar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/edit.png"))); // NOI18N
@@ -141,9 +149,9 @@ public class Consulta extends javax.swing.JFrame {
                 .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,29 +246,30 @@ public class Consulta extends javax.swing.JFrame {
         modelo.addColumn("Código");
         modelo.addColumn("Nome");
         modelo.addColumn("Preço");
-        
-       
-        
+
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
-        
+
         }
-        
-         tabela.setModel(modelo);
+
+        tabela.setModel(modelo);
         tabela.setAutoResizeMode(0);
-        
-         // alinhamento das colunas...
-        DefaultTableCellRenderer alinhamentoEsquerda = new DefaultTableCellRenderer();
+
+        // alinhamento das colunas...
+        DefaultTableCellRenderer alinhamentoCentro = new DefaultTableCellRenderer();
         DefaultTableCellRenderer alinhamentoDireita = new DefaultTableCellRenderer();
-        alinhamentoEsquerda.setHorizontalAlignment(SwingConstants.LEFT);
-        alinhamentoDireita.setHorizontalAlignment(SwingConstants.RIGHT);
-        tabela.getColumnModel().getColumn(0).setCellRenderer(alinhamentoDireita);
-        tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoEsquerda);
+        alinhamentoCentro.setHorizontalAlignment(SwingConstants.CENTER);
+        alinhamentoDireita.setHorizontalAlignment(SwingConstants.CENTER);
+        tabela.getColumnModel().getColumn(0).setCellRenderer(alinhamentoCentro);
+        tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoCentro);
+        tabela.getColumnModel().getColumn(2).setCellRenderer(alinhamentoDireita);
 
         // definição da largura das colunas...
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(200);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(150);
+        
+        tabela.setAutoResizeMode(0);
 
         // sobrescreve o método valueChanged para identificar qual é a linha
         // que está selecionada e carregar os dados da tabela para os TextFields.
