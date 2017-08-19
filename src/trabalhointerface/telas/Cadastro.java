@@ -8,7 +8,7 @@ import trabalhointerface.util.Mensagens;
 import trabalhointerface.util.Validacao;
 
 public class Cadastro extends javax.swing.JFrame {
-    
+
     private final boolean modoInclusao;
     private final ProdutoDTO produto;
 
@@ -24,9 +24,9 @@ public class Cadastro extends javax.swing.JFrame {
         }
         this.setLocationRelativeTo(null);
     }
-    
+
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
-    
+
     public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) {
         boolean aux = false;
         if (Validacao.validaCampo(nomePDTO)) {
@@ -35,10 +35,11 @@ public class Cadastro extends javax.swing.JFrame {
             } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(iconePDTO)))) {
                 if (modoInclusao) {
                     produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
+
                 } else {
                     produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getText(), produto.getCodigo());
+
                 }
-                aux = true;
             }
         } else {
             if (modoInclusao) {
@@ -50,7 +51,7 @@ public class Cadastro extends javax.swing.JFrame {
         }
         return aux;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

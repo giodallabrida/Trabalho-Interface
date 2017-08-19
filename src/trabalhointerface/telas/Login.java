@@ -150,7 +150,7 @@ public class Login extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_senhaUsuarioActionPerformed
 
-    public static boolean criaLogin() {
+    public boolean criaLogin() {
         Login login = new Login(null, true);
         login.setVisible(true);
         return login.autenticado;
