@@ -19,8 +19,6 @@ public class Arquivos extends javax.swing.JDialog {
     private boolean aux = false;
 
     public boolean verificaAcao() {
-        
-//this.setTitle("Selecionado" + evt.getActionCommand() + " - " + selecionado.getPath());
         return aux;
     }
 
@@ -66,8 +64,6 @@ public class Arquivos extends javax.swing.JDialog {
                 selected = seletor.getSelectedFile().getPath();
                 aux = true;
             }
-
-                //this.setTitle("Selecionado" + evt.getActionCommand() + " - " + selecionado.getPath());
         }
         this.dispose();
     }//GEN-LAST:event_seletorActionPerformed

@@ -1,17 +1,29 @@
 package trabalhointerface.telas;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.persistencia.ProdutoDAO;
+import trabalhointerface.persistencia.VendaDAO;
+import trabalhointerface.util.Mensagens;
 
 public class Vendas extends javax.swing.JFrame {
+
+    private float totalVendas;
+
+    public float getTotalVendas() {
+        return totalVendas;
+    }
+
+    public void setTotalVendas(float totalVendas) {
+        this.totalVendas = totalVendas;
+    }
+    private float vendaAtual;
+
+    VendaDAO venda = new VendaDAO();
 
     public Vendas() {
         initComponents();
@@ -22,10 +34,6 @@ public class Vendas extends javax.swing.JFrame {
     public Object[][] mprodutos = null;
 
     public void criaBotoes() {
-        //painel.setLayout(null);
-        //painel.setPreferredSize(painel.getPreferredSize());
-
-        
         // posições nos eixos X e Y de cada botão...
         int posX = 25;
         int posY = 20;
@@ -41,7 +49,7 @@ public class Vendas extends javax.swing.JFrame {
             mprodutos[linha][1] = pdto;
             linha++;
             botao.setText("0");
-            botao.setToolTipText(pdto.getNome() + " - R$" + pdto.getPreco());
+            botao.setToolTipText(pdto.getNome() + " - R$ " + pdto.getPreco());
             botao.setBounds(posX, posY, 135, 60);
             botao.setIcon(pdto.getIcone());
 
@@ -53,11 +61,13 @@ public class Vendas extends javax.swing.JFrame {
             // possa responder a eventos específicos. o ActionListener adicionado
             // desvia a execução do código para o método "processaPressionamentoBotao()"
             // no qual é possível "identificar" qual foi o botão pressionado.
-            botao.addActionListener(new ActionListener() {
+            botao.addMouseListener(new MouseAdapter() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    processaPressionamentoBotao(e);
+                public void mouseClicked(MouseEvent e) {
+                    processaPressionamentoBotao(e, botao);
                 }
+                
+               
             });
 
             // o botão criado acima precisa ser adicionado ao JFrame (isso não é feito
@@ -73,54 +83,29 @@ public class Vendas extends javax.swing.JFrame {
             if (posX >= 645) {
                 posX = 25;
                 posY += 90;
-                if (posY >= 400) {
-
-                    //ativar barra de rolagem
-                }
+                //if (posY >= 400) {
+                //}
             }
         }
-        /*
-        scroll = new JScrollPane(painel);
-        scroll.add(painel);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        //scroll.setBounds(50, 30, 300, 50);
-        painelP.setPreferredSize(painel.getPreferredSize());
-        painelP.add(scroll);
-        //this.setContentPane(painelP);
-        this.pack();
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
-        
-        
-        
-        scroll = new JScrollPane(painel);
-        scroll.setPreferredSize(painel.getPreferredSize());
-        //scroll.add(painel);
-        //scroll.setViewportView(painel);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);*/
         this.repaint();
     }
 
-    private void processaPressionamentoBotao(ActionEvent e) {
-        JButton botao = (JButton) e.getSource();
-        botao.setText(String.valueOf(Integer.valueOf(botao.getText()) + 1));
-        //if (e.getActionCommand() == ){
-            
-        //}
-    }
-    
-    /*public void fazConta(){
-        String vetor[]; 
-        JButton botao = new JButton();
-        for (int l = 0; l < mprodutos.length; l++) {
-         //   botao = mprodutos[l][0];
-            vetor = botao.getToolTipText().split("$");
+    private void processaPressionamentoBotao(MouseEvent e, JButton botao) {
+        total.setText("");
+        vendaAtual = 0;
+        btnEncerra.setEnabled(true);
+        finaliza.setEnabled(false);
+        botao = (JButton) e.getSource();
+        if (SwingUtilities.isRightMouseButton(e)) {
+            if (botao.getText().equals("0")) {
+                Mensagens.msgAviso("Quantidade inválida.");
+            } else {
+                botao.setText((String.valueOf(Integer.valueOf(botao.getText()) - 1)));
+            }
+        } else if (SwingUtilities.isLeftMouseButton(e)) {
+            botao.setText((String.valueOf(Integer.valueOf(botao.getText()) + 1)));
         }
-*/
-    
-    
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,19 +113,18 @@ public class Vendas extends javax.swing.JFrame {
 
         painelP = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        btnTotal = new javax.swing.JButton();
+        btnEncerra = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
         painel = new javax.swing.JPanel();
-        encerrar = new javax.swing.JButton();
+        finaliza = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
-        setMinimumSize(new java.awt.Dimension(758, 479));
+        setMaximumSize(new java.awt.Dimension(694, 501));
+        setMinimumSize(new java.awt.Dimension(694, 501));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -150,6 +134,8 @@ public class Vendas extends javax.swing.JFrame {
 
         painelP.setBackground(new java.awt.Color(153, 255, 204));
         painelP.setAutoscrolls(true);
+        painelP.setMaximumSize(new java.awt.Dimension(694, 501));
+        painelP.setMinimumSize(new java.awt.Dimension(694, 501));
 
         jLabel2.setFont(new java.awt.Font("Baskerville Old Face", 1, 36)); // NOI18N
         jLabel2.setText("Vendas");
@@ -159,11 +145,11 @@ public class Vendas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 0, 24)); // NOI18N
         jLabel1.setText("Total");
 
-        btnTotal.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
-        btnTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/coins.png"))); // NOI18N
-        btnTotal.addActionListener(new java.awt.event.ActionListener() {
+        btnEncerra.setFont(new java.awt.Font("Baskerville Old Face", 0, 18)); // NOI18N
+        btnEncerra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/coins.png"))); // NOI18N
+        btnEncerra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTotalActionPerformed(evt);
+                btnEncerraActionPerformed(evt);
             }
         });
 
@@ -187,19 +173,19 @@ public class Vendas extends javax.swing.JFrame {
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 671, Short.MAX_VALUE)
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
 
         scroll.setViewportView(painel);
 
-        encerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/maquina.png"))); // NOI18N
-        encerrar.addActionListener(new java.awt.event.ActionListener() {
+        finaliza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/maquina.png"))); // NOI18N
+        finaliza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                encerrarActionPerformed(evt);
+                finalizaActionPerformed(evt);
             }
         });
 
@@ -212,53 +198,44 @@ public class Vendas extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(btnTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnEncerra, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(encerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
             .addGroup(painelPLayout.createSequentialGroup()
                 .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
-                    .addGroup(painelPLayout.createSequentialGroup()
-                        .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelPLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painelPLayout.createSequentialGroup()
-                                .addGap(316, 316, 316)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(painelPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(scroll)))
-                .addContainerGap())
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelPLayout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(jLabel2)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         painelPLayout.setVerticalGroup(
             painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(encerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(17, 17, 17)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelPLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(finaliza, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                            .addComponent(btnEncerra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(painelPLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(painelPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,37 +252,53 @@ public class Vendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void finalizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizaActionPerformed
+        if (vendaAtual != 0) {
+            if (Mensagens.msgConf("O total da sua compra é de R$" + vendaAtual + ".\n Você deseja finalizar essa compra?")) {
+                totalVendas = totalVendas + vendaAtual;
+                Mensagens.msgInfo("Sua compra foi finalizada.");
+                venda.insereVendaBD(totalVendas);
+                Menu menu = new Menu();
+                menu.setVisible(true);
+                this.setVisible(false);
+            }
+        } else {
+            Mensagens.msgAviso("Nenhum produto foi selecionado.");
+        }
+    }//GEN-LAST:event_finalizaActionPerformed
+
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         Menu menu = new Menu();
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    
-
-    private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
-
-        //total.setText(String.valueOf(contaTotal));
-    }//GEN-LAST:event_btnTotalActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        System.exit(0);
-    }//GEN-LAST:event_formWindowClosed
-
-    private void encerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarActionPerformed
-        //Relatorio rel = new Relatorio();
-        //rel.setTotalVendas(rel.getTotalVendas() + Float.valueOf(total.getText()));
-    }//GEN-LAST:event_encerrarActionPerformed
-
+    private void btnEncerraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncerraActionPerformed
+        btnEncerra.setEnabled(false);
+        finaliza.setEnabled(true);
+        int aux;
+        for (int i = 0; i < mprodutos.length; i++) {
+            Object[] mproduto = mprodutos[i];
+            JButton botao = (JButton) mprodutos[i][0];
+            ProdutoDTO pdto = (ProdutoDTO) mprodutos[i][1];
+            aux = Integer.valueOf(botao.getText());
+            if (aux != 0) {
+                vendaAtual = vendaAtual + (aux * pdto.getPreco());
+            }
+        }
+        total.setText(String.valueOf(vendaAtual));
+    }//GEN-LAST:event_btnEncerraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTotal;
+    private javax.swing.JButton btnEncerra;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton encerrar;
+    private javax.swing.JButton finaliza;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel painelP;
     private javax.swing.JScrollPane scroll;

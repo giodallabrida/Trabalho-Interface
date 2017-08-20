@@ -27,14 +27,18 @@ public class Validacao {
     public static boolean validaFloat(JTextField campo, int min, int max) {
         try {
             float valor = Float.valueOf(campo.getText());
-            if (valor <= min || valor >= max) {
+            if (campo.getText().trim().isEmpty()) {
+                Mensagens.msgErro(campo.getToolTipText());
+                campo.requestFocus();
+                return false;
+            } else if (valor <= min || valor >= max) {
                 Mensagens.msgErro("Preço inválido.");
                 return false;
             } else {
                 return true;
             }
-        } catch (Exception e) {
-            Mensagens.msgErro("Preço inválido.");
+        } catch (NumberFormatException e) {
+            Mensagens.msgErro("Preço inválido " + e.getMessage());
             campo.requestFocus();
             return false;
         }

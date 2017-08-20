@@ -11,6 +11,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private final boolean modoInclusao;
     private final ProdutoDTO produto;
+    private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
     //caminho.setText(cod.getIcone().toString());
     public Cadastro(boolean modoInclusao, ProdutoDTO produto) {
@@ -21,32 +22,35 @@ public class Cadastro extends javax.swing.JFrame {
             nomeProduto.setText(produto.getNome());
             precoProduto.setText(String.valueOf(produto.getPreco()));
             iconeProduto.setIcon(produto.getIcone());
+
         }
         this.setLocationRelativeTo(null);
     }
 
-    private final ProdutoDAO produtoDAO = new ProdutoDAO();
-
-    public boolean cadastraProduto(JTextField nomePDTO, JTextField precoPDTO, JLabel iconePDTO) {
-        boolean aux = false;
-        if (Validacao.validaCampo(nomePDTO)) {
-            if (produtoDAO.verificaNome(nomePDTO.getText(), produto.getCodigo())) {
+    public boolean cadastraOuAlteraProduto(JTextField nome, JTextField preco, JLabel caminhoIcone) {
+        boolean aux = false, pesquisaIcone = false;
+        
+        if (alteraIcone.getActionCommand().equals("alteraIconeActionPerformed")) {
+            pesquisaIcone = true;
+        }
+        
+        if (Validacao.validaCampo(nome)) {
+            if (produtoDAO.verificaNome(nome.getText(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
-            } else if (Validacao.validaCampo(precoPDTO) && (Validacao.validaFloat(precoPDTO, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(iconePDTO)))) {
+            } else if ((Validacao.validaFloat(preco, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(caminhoIcone)))) {
                 if (modoInclusao) {
-                    produtoDAO.cadastraProdutoBD(nomePDTO.getText(), Float.valueOf(precoPDTO.getText()), iconePDTO.getText());
-
+                    produtoDAO.cadastraProdutoBD(nome.getText(), Float.valueOf(preco.getText()), caminhoIcone.getText());
                 } else {
-                    produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getText(), produto.getCodigo());
-
+                    produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), caminhoIcone.getText(), produto.getCodigo(), pesquisaIcone);
                 }
+                aux = true;
             }
         } else {
             if (modoInclusao) {
-                nomePDTO.setText("");
-                precoPDTO.setText("");
+                nome.setText("");
+                preco.setText("");
                 caminho.setText("");
-                iconePDTO.setIcon(null);
+                caminhoIcone.setIcon(null);
             }
         }
         return aux;
@@ -226,7 +230,7 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (cadastraProduto(nomeProduto, precoProduto, caminho)) {
+        if (cadastraOuAlteraProduto(nomeProduto, precoProduto, caminho)) {
             if (modoInclusao) {
                 Mensagens.msgInfo("Produto adicionado com sucesso.");
             } else {

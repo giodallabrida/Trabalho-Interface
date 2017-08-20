@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import trabalhointerface.util.Mensagens;
 
 public class UsuarioDAO {
 
@@ -34,8 +33,10 @@ public class UsuarioDAO {
             if (rs.next()) {
                 verifica = true;
             }
+            rs.close();
+            p.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Mensagens.msgErro("Ocorreu um erro ao validar o usuário. \n " + ex.getMessage());
         }
 
         return verifica;
@@ -56,8 +57,9 @@ public class UsuarioDAO {
             p.setString(1, user);
             p.setString(2, senha);
             p.execute();
+            p.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Mensagens.msgErro("Ocorreu um erro ao alterar o login. \n " + ex.getMessage());
         }
 
     }

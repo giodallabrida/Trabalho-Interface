@@ -216,9 +216,13 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        Cadastro cadastro = new Cadastro(true, new ProdutoDTO());
-        cadastro.setVisible(true);
-        this.setVisible(false);
+        if (listaProdutos.size() == 16) {
+            Mensagens.msgAviso("Você não pode cadastrar mais produtos.");
+        } else {
+            Cadastro cadastro = new Cadastro(true, new ProdutoDTO());
+            cadastro.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -249,7 +253,6 @@ public class Consulta extends javax.swing.JFrame {
 
         for (ProdutoDTO pdto : listaProdutos) {
             modelo.addRow(pdto.getLinhaTabela());
-
         }
 
         tabela.setModel(modelo);
@@ -268,23 +271,8 @@ public class Consulta extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(250);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(150);
-        
+
         tabela.setAutoResizeMode(0);
-
-        // sobrescreve o método valueChanged para identificar qual é a linha
-        // que está selecionada e carregar os dados da tabela para os TextFields.
-        /*tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-           
-         @Override
-            public void valueChanged(ListSelectionEvent evt) {
-                if (evt.getValueIsAdjusting()) {
-                    return;
-                }
-                int linhaSelecionada = tabela.getSelectedRow();
-
-            }
-        });
-         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,5 @@
 package trabalhointerface.telas;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -150,7 +147,7 @@ public class Login extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_senhaUsuarioActionPerformed
 
-    public boolean criaLogin() {
+    public static boolean criaLogin() {
         Login login = new Login(null, true);
         login.setVisible(true);
         return login.autenticado;

@@ -3,6 +3,7 @@ package trabalhointerface;
 import trabalhointerface.telas.Inicio;
 
 public class Vendas {
+    
     /*
     Script BD:
     
