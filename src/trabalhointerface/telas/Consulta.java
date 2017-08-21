@@ -196,8 +196,10 @@ public class Consulta extends javax.swing.JFrame {
 
     ProdutoDAO dao = new ProdutoDAO();
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        
         int linhaSelecionada = tabela.getSelectedRow();
         if (linhaSelecionada > -1) {
+            btnRemover.setEnabled(false);
             ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
             dao.removeProdutoBD(codigo.getCodigo());
             Mensagens.msgInfo("O produto foi removido com sucesso!");
@@ -210,12 +212,14 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        Voltar.setEnabled(false);
         Menu menu = new Menu();
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        btnAdicionar.setEnabled(false);
         if (listaProdutos.size() == 16) {
             Mensagens.msgAviso("Você não pode cadastrar mais produtos.");
         } else {
@@ -228,12 +232,13 @@ public class Consulta extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int linhaSelecionada = tabela.getSelectedRow();
         if (linhaSelecionada > -1) {
+            btnAlterar.setEnabled(false);
             ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
             Cadastro cadastro = new Cadastro(false, codigo);
             cadastro.setVisible(true);
             this.setVisible(false);
         } else {
-            Mensagens.msgAviso("Selecione um produto a ser alterada!");
+            Mensagens.msgAviso("Selecione um produto a ser alterado!");
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 

@@ -120,6 +120,7 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        btnEntrar.setEnabled(false);
         Menu menu = new Menu();
         menu.setVisible(true);
         this.setVisible(false);

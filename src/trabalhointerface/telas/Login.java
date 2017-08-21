@@ -8,8 +8,11 @@ import trabalhointerface.util.Validacao;
 
 public class Login extends javax.swing.JDialog {
 
-    public Login(java.awt.Frame parent, boolean modal) {
+    private final Menu menu;
+
+    public Login(java.awt.Frame parent, boolean modal, Menu menu) {
         super(parent, modal);
+        this.menu = menu;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -34,6 +37,11 @@ public class Login extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(400, 206));
         setMinimumSize(new java.awt.Dimension(400, 206));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(164, 226, 187));
 
@@ -42,11 +50,6 @@ public class Login extends javax.swing.JDialog {
 
         senhaUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         senhaUsuario.setToolTipText("Insira a senha de acesso.");
-        senhaUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaUsuarioActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/door-key.png"))); // NOI18N
@@ -130,30 +133,33 @@ public class Login extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         autenticado = fazLogin(userUsuario, senhaUsuario);
-        if(autenticado){
+        if (autenticado) {
             this.dispose();
-        }else{
+        } else {
             userUsuario.setText("");
             senhaUsuario.setText("");
         }
-        
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.setVisible(false);
+        menu.getBtnAlterar().setEnabled(true);
+        menu.getBtnRelatorio().setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void senhaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_senhaUsuarioActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        menu.getBtnAlterar().setEnabled(true);
+        menu.getBtnRelatorio().setEnabled(true);
+    }//GEN-LAST:event_formWindowClosing
 
-    public static boolean criaLogin() {
-        Login login = new Login(null, true);
+    public boolean criaLogin() {
+        Login login = new Login(null, true, menu);
         login.setVisible(true);
         return login.autenticado;
     }
 
-    public boolean fazLogin(JTextField user, JPasswordField senha){
+    public boolean fazLogin(JTextField user, JPasswordField senha) {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -165,7 +171,7 @@ public class Login extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);
             }
-     }
+        }
         return aux;
     }
 

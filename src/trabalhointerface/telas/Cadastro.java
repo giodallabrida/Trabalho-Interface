@@ -28,22 +28,21 @@ public class Cadastro extends javax.swing.JFrame {
     }
 
     public boolean cadastraOuAlteraProduto(JTextField nome, JTextField preco, JLabel caminhoIcone) {
-        boolean aux = false, pesquisaIcone = false;
-        
-        if (alteraIcone.getActionCommand().equals("alteraIconeActionPerformed")) {
-            pesquisaIcone = true;
-        }
-        
+        boolean aux = false;
         if (Validacao.validaCampo(nome)) {
             if (produtoDAO.verificaNome(nome.getText(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
             } else if ((Validacao.validaFloat(preco, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(caminhoIcone)))) {
                 if (modoInclusao) {
-                    produtoDAO.cadastraProdutoBD(nome.getText(), Float.valueOf(preco.getText()), caminhoIcone.getText());
+                    aux = produtoDAO.cadastraProdutoBD(nome.getText(), Float.valueOf(preco.getText()), caminhoIcone.getText());
                 } else {
-                    produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), caminhoIcone.getText(), produto.getCodigo(), pesquisaIcone);
+                    aux = produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), jButton1.getIcon(), produto.getCodigo());
                 }
-                aux = true;
+                if (modoInclusao && aux) {
+                    Mensagens.msgInfo("Produto adicionado com sucesso.");
+                } else if (!modoInclusao && aux) {
+                    Mensagens.msgInfo("Produto alterado com sucesso.");
+                }
             }
         } else {
             if (modoInclusao) {
@@ -73,6 +72,7 @@ public class Cadastro extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -127,6 +127,8 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Baskerville Old Face", 0, 12)); // NOI18N
         jLabel5.setText("Entre R$ 1,00 e R$ 100. ");
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,14 +160,20 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(alteraIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(87, 87, 87)
+                                    .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(alteraIcone, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton1)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
                         .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,14 +191,16 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(precoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(alteraIcone)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(1, 1, 1)
-                            .addComponent(jLabel4))
-                        .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alteraIcone)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel4))
+                            .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(iconeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalvar)
@@ -219,23 +229,19 @@ public class Cadastro extends javax.swing.JFrame {
             String arquivoSelecionado = arquivos.getSelected();
             caminho.setText(arquivoSelecionado);
             iconeProduto.setIcon(new javax.swing.ImageIcon(arquivoSelecionado));
+            jButton1.setIcon(new javax.swing.ImageIcon(arquivoSelecionado));
         }
     }//GEN-LAST:event_alteraIconeActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Consulta consulta = null;
-        consulta = new Consulta();
+        btnCancelar.setEnabled(false);
+        Consulta consulta = new Consulta();
         consulta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (cadastraOuAlteraProduto(nomeProduto, precoProduto, caminho)) {
-            if (modoInclusao) {
-                Mensagens.msgInfo("Produto adicionado com sucesso.");
-            } else {
-                Mensagens.msgInfo("Produto alterado com sucesso.");
-            }
             Consulta consulta = new Consulta();
             consulta.setVisible(true);
             this.setVisible(false);
@@ -249,6 +255,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel caminho;
     private javax.swing.JLabel iconeProduto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

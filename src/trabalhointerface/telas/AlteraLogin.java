@@ -1,8 +1,5 @@
 package trabalhointerface.telas;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import trabalhointerface.persistencia.UsuarioDAO;
@@ -139,6 +136,7 @@ public class AlteraLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
         if (alteraLogin(novoUsuario, novaSenha)) {
             Mensagens.msgInfo("Login alterado com sucesso.");
             Menu menu = new Menu();
@@ -152,6 +150,7 @@ public class AlteraLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        btnCancelar.setEnabled(false);
         Menu menu = new Menu();
         menu.setVisible(true);
         this.setVisible(false);

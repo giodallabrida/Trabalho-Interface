@@ -1,7 +1,9 @@
 package trabalhointerface.persistencia;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,13 +17,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import trabalhointerface.modelo.ProdutoDTO;
 import trabalhointerface.util.Mensagens;
 
 public class ProdutoDAO {
 
-    public void cadastraProdutoBD(String nomePDTO, float precoPDTO, String iconePDTO) {
+    public boolean cadastraProdutoBD(String nomePDTO, float precoPDTO, String iconePDTO) {
+        boolean aux = false;
         File file = new File(iconePDTO);
         FileInputStream fileSream;
         try {
@@ -41,6 +45,7 @@ public class ProdutoDAO {
             p.setBinaryStream(3, fileSream, (int) file.length());
             p.execute();
             p.close();
+            aux = true;
         } catch (FileNotFoundException | SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados \n " + ex.getMessage());
         }
@@ -53,43 +58,43 @@ public class ProdutoDAO {
         image = new ImageIcon(new ImageIcon(imagemBuff).getImage().getScaledInstance(136, 135, Image.SCALE_DEFAULT));
 
          */
+        return aux;
     }
 
-    public void alteraProdutoBD(String nomePDTO, Float precoPDTO, String iconePDTO, int codigo, boolean pesquisaIcone) {
-        //imagem pra blob
-        File file = null;
-        FileInputStream fileSream = null;
+    public boolean alteraProdutoBD(String nomePDTO, Float precoPDTO, Icon iconePDTO, int codigo) {
+        boolean aux = false;
         try {
-            if (pesquisaIcone) {
-                file = new File(iconePDTO);
-                fileSream = new FileInputStream(file);
-            }
             String str = "jdbc:mysql://localhost:3307/fat_truck?"
                     + "user=root&password=root";
             // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
             Connection conn = DriverManager.getConnection(str);
-            String sql = "update produto set NOM_PDTO = ?, PRECO_PDTO = ?, ICON_PDTO = ?"
-                    + "where COD_PDTO = ?";
+            String sql = "update produto set NOM_PDTO = ?, PRECO_PDTO = ?, ICON_PDTO = ? "
+                    + " where COD_PDTO = ?";
             // enviar o select para ser analisado pelo banco
             // de dados...
             PreparedStatement p = conn.prepareStatement(sql);
             // definir o valor de cada um dos parâmetros...
             p.setString(1, nomePDTO);
             p.setFloat(2, precoPDTO);
-            if (pesquisaIcone) {
-                p.setBinaryStream(3, fileSream, (int) file.length());
-            } else {
-                p.setBinaryStream(3, agoraVai(codigo));
-            }
+
+            ImageIcon imagem = (ImageIcon) iconePDTO;
+            BufferedImage b = (BufferedImage) imagem.getImage();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(b, "png", baos);
+            
+            p.setBytes(3, baos.toByteArray());
             p.setInt(4, codigo);
             p.execute();
             p.close();
-        } catch (FileNotFoundException | SQLException ex) {
+            aux = true;
+        } catch (Exception ex) {
             Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados \n " + ex.getMessage());
         }
+        return aux;
     }
 
-    public void removeProdutoBD(int codigo) {
+    public boolean removeProdutoBD(int codigo) {
+        boolean aux = false;
         try {
             String str = "jdbc:mysql://localhost:3307/fat_truck?"
                     + "user=root&password=root";
@@ -99,9 +104,11 @@ public class ProdutoDAO {
             p.setInt(1, codigo);
             p.execute();
             p.close();
+            aux = true;
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao remover o produto \n " + ex.getMessage());
         }
+        return aux;
     }
 
     public boolean verificaNome(String nome, int cod) {

@@ -1,13 +1,24 @@
 package trabalhointerface.telas;
 
-public class Menu extends javax.swing.JFrame {
+import javax.swing.JButton;
 
+public class Menu extends javax.swing.JFrame {
+    
     public Menu() {
-        
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
+    private Login login = new Login(this, true, this);
+    
+    public JButton getBtnAlterar() {
+        return btnAlterar;
+    }
+
+    public JButton getBtnRelatorio() {
+        return btnRelatorio;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -147,12 +158,14 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
+        btnVendas.setEnabled(false);
         Vendas vendas = new Vendas();
         vendas.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
+        btnCadastro.setEnabled(false);
         Consulta consulta = null;
         consulta = new Consulta();
         consulta.setVisible(true);
@@ -160,7 +173,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        if (Login.criaLogin()) {
+        btnRelatorio.setEnabled(false);
+        if (login.criaLogin()) {
             Relatorio rel = new Relatorio();
             rel.setVisible(true);
             this.setVisible(false);
@@ -168,7 +182,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (Login.criaLogin()) {
+        btnAlterar.setEnabled(false);
+        if (login.criaLogin()) {
             AlteraLogin alt = new AlteraLogin();
             alt.setVisible(true);
             this.setVisible(false);
