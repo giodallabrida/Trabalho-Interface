@@ -27,7 +27,7 @@ public class Inicio extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(613, 417));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(164, 226, 187));
+        jPanel1.setBackground(new java.awt.Color(31, 185, 185));
 
         jLabel2.setFont(new java.awt.Font("Harrington", 1, 90)); // NOI18N
         jLabel2.setText("FAT TRUCK");
@@ -45,7 +45,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/star.png"))); // NOI18N
 
-        btnEntrar.setBackground(new java.awt.Color(164, 226, 187));
+        btnEntrar.setBackground(new java.awt.Color(31, 185, 185));
         btnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/van.png"))); // NOI18N
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

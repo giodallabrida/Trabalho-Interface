@@ -13,10 +13,9 @@ public class AlteraLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public boolean alteraLogin(JTextField user, JPasswordField senha){
-        // validar nome de usuário e senha - não vazios...
+    public boolean alteraLogin(JTextField user, JPasswordField senha) {
         boolean aux = false;
-        if (Validacao.validaCampo(user)
+        if (Validacao.validaCampo(user) && Validacao.validaString(user) && Validacao.validaString(senha)
                 && Validacao.validaSenha(senha)) {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
@@ -37,6 +36,8 @@ public class AlteraLogin extends javax.swing.JFrame {
         novaSenha = new javax.swing.JPasswordField();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        validacao2 = new javax.swing.JLabel();
+        validacao3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alterar Login");
@@ -44,7 +45,7 @@ public class AlteraLogin extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(431, 245));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(251, 186, 186));
+        jPanel1.setBackground(new java.awt.Color(134, 200, 244));
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/PENCIL.png"))); // NOI18N
@@ -78,10 +79,22 @@ public class AlteraLogin extends javax.swing.JFrame {
             }
         });
 
+        validacao2.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
+        validacao2.setText("De 1 a 60 caracteres. ");
+
+        validacao3.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
+        validacao3.setText("De 1 a 60 caracteres. ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,36 +102,36 @@ public class AlteraLogin extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(validacao3)
+                    .addComponent(validacao2)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(novoUsuario)
                         .addComponent(novaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(validacao2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(novoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(validacao3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(novaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(novaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,11 +155,11 @@ public class AlteraLogin extends javax.swing.JFrame {
             Menu menu = new Menu();
             menu.setVisible(true);
             this.setVisible(false);
-        }else{
+        } else {
             novoUsuario.setText("");
             novaSenha.setText("");
         }
-        
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -166,5 +179,7 @@ public class AlteraLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField novaSenha;
     private javax.swing.JTextField novoUsuario;
+    private javax.swing.JLabel validacao2;
+    private javax.swing.JLabel validacao3;
     // End of variables declaration//GEN-END:variables
 }

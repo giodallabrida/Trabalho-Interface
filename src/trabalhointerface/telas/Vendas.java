@@ -132,7 +132,7 @@ public class Vendas extends javax.swing.JFrame {
             }
         });
 
-        painelP.setBackground(new java.awt.Color(153, 255, 204));
+        painelP.setBackground(new java.awt.Color(31, 185, 185));
         painelP.setAutoscrolls(true);
         painelP.setMaximumSize(new java.awt.Dimension(694, 501));
         painelP.setMinimumSize(new java.awt.Dimension(694, 501));
@@ -165,7 +165,7 @@ public class Vendas extends javax.swing.JFrame {
         scroll.setToolTipText("");
         scroll.setAutoscrolls(true);
 
-        painel.setBackground(new java.awt.Color(153, 255, 204));
+        painel.setBackground(new java.awt.Color(31, 185, 185));
         painel.setAutoscrolls(true);
         painel.setPreferredSize(new java.awt.Dimension(100, 100));
 

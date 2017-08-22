@@ -1,5 +1,6 @@
 package trabalhointerface.persistencia;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -8,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,32 +32,19 @@ public class ProdutoDAO {
             fileSream = new FileInputStream(file);
             String str = "jdbc:mysql://localhost:3307/fat_truck?"
                     + "user=root&password=root";
-            // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
             Connection conn = DriverManager.getConnection(str);
             String sql = "insert into produto (NOM_PDTO, PRECO_PDTO, ICON_PDTO) values"
                     + " (?, ?, ?)";
-            // enviar o select para ser analisado pelo banco
-            // de dados...
             PreparedStatement p = conn.prepareStatement(sql);
-            // definir o valor de cada um dos parâmetros...
             p.setString(1, nomePDTO);
             p.setFloat(2, precoPDTO);
             p.setBinaryStream(3, fileSream, (int) file.length());
             p.execute();
             p.close();
             aux = true;
-        } catch (FileNotFoundException | SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados \n " + ex.getMessage());
+        } catch (Exception ex) {
+            Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados. \n " + ex.getMessage());
         }
-
-        //BD PARA ATRIBUTO
-        /*
-        Blob blob = rs.getBlob("binImagem");
-        byte[] imagebytes = blob.getBytes(1, (int) blob.length());
-        BufferedImage imagemBuff = ImageIO.read(new ByteArrayInputStream(imagebytes));
-        image = new ImageIcon(new ImageIcon(imagemBuff).getImage().getScaledInstance(136, 135, Image.SCALE_DEFAULT));
-
-         */
         return aux;
     }
 
@@ -66,31 +53,38 @@ public class ProdutoDAO {
         try {
             String str = "jdbc:mysql://localhost:3307/fat_truck?"
                     + "user=root&password=root";
-            // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
             Connection conn = DriverManager.getConnection(str);
             String sql = "update produto set NOM_PDTO = ?, PRECO_PDTO = ?, ICON_PDTO = ? "
                     + " where COD_PDTO = ?";
-            // enviar o select para ser analisado pelo banco
-            // de dados...
             PreparedStatement p = conn.prepareStatement(sql);
-            // definir o valor de cada um dos parâmetros...
             p.setString(1, nomePDTO);
             p.setFloat(2, precoPDTO);
-
-            ImageIcon imagem = (ImageIcon) iconePDTO;
-            BufferedImage b = (BufferedImage) imagem.getImage();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(b, "png", baos);
-            
-            p.setBytes(3, baos.toByteArray());
+            p.setBytes(3, imageToBlob(iconePDTO));
             p.setInt(4, codigo);
             p.execute();
             p.close();
             aux = true;
         } catch (Exception ex) {
-            Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados. \n " + ex.getMessage());
         }
         return aux;
+    }
+
+    private byte[] imageToBlob(Icon icon) {
+        ImageIcon imagem = (ImageIcon) icon;
+        BufferedImage newImage = new BufferedImage(imagem.getIconWidth(), imagem.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics g = newImage.getGraphics();
+        g.drawImage(imagem.getImage(), 0, 0, null);
+        g.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(newImage, "png", baos);
+            return baos.toByteArray();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public boolean removeProdutoBD(int codigo) {
@@ -106,7 +100,7 @@ public class ProdutoDAO {
             p.close();
             aux = true;
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao remover o produto \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao remover o produto do banco de dados. \n " + ex.getMessage());
         }
         return aux;
     }
@@ -131,7 +125,7 @@ public class ProdutoDAO {
             rs.close();
             p.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao verificar o nome do produto \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao verificar o nome do produto no banco de dados. \n " + ex.getMessage());
         }
 
         return aux;
@@ -154,32 +148,9 @@ public class ProdutoDAO {
             rs.close();
             p.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao carregar os produtos do banco de dados \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao carregar os produtos do banco de dados. \n " + ex.getMessage());
         }
         return listaPDTO;
-    }
-
-    private InputStream agoraVai(int cod) {
-        InputStream binaryStream = null;
-        try {
-            String str = "jdbc:mysql://localhost:3307/FAT_TRUCK?"
-                    + "user=root&password=root";
-            Connection conn;
-            conn = DriverManager.getConnection(str);
-            String sql = "select (ICON_PDTO) from Produto where COD_PDTO = ?";
-            PreparedStatement p = conn.prepareStatement(sql);
-
-            p.setInt(1, cod);
-            ResultSet rs = p.executeQuery();
-            while (rs.next()) {
-                binaryStream = rs.getBinaryStream(1);
-            }
-            rs.close();
-            p.close();
-        } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao transformar Blob to Image \n " + ex.getMessage());
-        }
-        return binaryStream;
     }
 
     private ImageIcon blobToImage(Blob blob, int cod) {
@@ -208,5 +179,4 @@ public class ProdutoDAO {
         }
         return icon;
     }
-
 }

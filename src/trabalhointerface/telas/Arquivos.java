@@ -1,6 +1,8 @@
 package trabalhointerface.telas;
 
 import java.io.File;
+import trabalhointerface.util.Mensagens;
+import trabalhointerface.util.Validacao;
 
 public class Arquivos extends javax.swing.JDialog {
 
@@ -29,6 +31,7 @@ public class Arquivos extends javax.swing.JDialog {
         seletor = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
 
         seletor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +65,12 @@ public class Arquivos extends javax.swing.JDialog {
         if (selecionado != null) {
             if (evt.getActionCommand().equals("ApproveSelection")) {
                 selected = seletor.getSelectedFile().getPath();
-                aux = true;
+                if (Validacao.validaPNG(selected)) {
+                    aux = true;
+                } else {
+                    Mensagens.msgAviso("O arquivo selecionado não é um arquivo .PNG! \n Selecione outro arquivo.");
+                    aux = false;
+                }
             }
         }
         this.dispose();

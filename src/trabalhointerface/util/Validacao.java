@@ -15,6 +15,21 @@ public class Validacao {
         return true;
     }
 
+    public static boolean validaString(JTextField campo) {
+        if (campo.getText().length() >= 60) {
+            Mensagens.msgAviso("Você só pode digitar 60 caracteres.");
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean validaPNG(String campo){
+        if (campo.substring(campo.length() - 3, campo.length()).equals("png")){
+            return true;
+        }
+        return false;
+    }
+
     public static boolean validaSenha(JPasswordField campo) {
         if (String.copyValueOf(campo.getPassword()).trim().isEmpty()) {
             Mensagens.msgErro(campo.getToolTipText());

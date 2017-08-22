@@ -72,7 +72,7 @@ public class Relatorio extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(556, 210));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(31, 185, 185));
         jPanel1.setMaximumSize(new java.awt.Dimension(556, 210));
         jPanel1.setMinimumSize(new java.awt.Dimension(556, 210));
 

@@ -30,6 +30,8 @@ public class Login extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        validacao1 = new javax.swing.JLabel();
+        validacao2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Efetue o Login");
@@ -43,7 +45,7 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(164, 226, 187));
+        jPanel1.setBackground(new java.awt.Color(134, 200, 244));
 
         userUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         userUsuario.setToolTipText("Insira o nome de usuário.");
@@ -77,6 +79,12 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        validacao1.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
+        validacao1.setText("De 1 a 60 caracteres. ");
+
+        validacao2.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
+        validacao2.setText("De 1 a 60 caracteres. ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,17 +104,23 @@ public class Login extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(senhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(userUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(validacao1)
+                            .addComponent(validacao2))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(43, 43, 43)
+                .addComponent(validacao1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(validacao2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(senhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -163,7 +177,7 @@ public class Login extends javax.swing.JDialog {
         // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        if (Validacao.validaCampo(user)
+        if (Validacao.validaCampo(user) && Validacao.validaString(user) && Validacao.validaString(senha)
                 && Validacao.validaSenha(senha)) {
             if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
                 // chamar o menu principal...
@@ -183,5 +197,7 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField senhaUsuario;
     private javax.swing.JTextField userUsuario;
+    private javax.swing.JLabel validacao1;
+    private javax.swing.JLabel validacao2;
     // End of variables declaration//GEN-END:variables
 }

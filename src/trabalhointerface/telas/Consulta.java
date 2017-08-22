@@ -39,10 +39,9 @@ public class Consulta extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(715, 523));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(31, 185, 185));
 
         jLabel1.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Consulta de Produtos");
 
         btnAdicionar.setFont(new java.awt.Font("Baskerville Old Face", 1, 18)); // NOI18N
@@ -151,7 +150,7 @@ public class Consulta extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(102, 102, 102))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,16 +195,16 @@ public class Consulta extends javax.swing.JFrame {
 
     ProdutoDAO dao = new ProdutoDAO();
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        
         int linhaSelecionada = tabela.getSelectedRow();
         if (linhaSelecionada > -1) {
             btnRemover.setEnabled(false);
             ProdutoDTO codigo = (ProdutoDTO) tabela.getValueAt(linhaSelecionada, 1);
-            dao.removeProdutoBD(codigo.getCodigo());
-            Mensagens.msgInfo("O produto foi removido com sucesso!");
-            Consulta consulta = new Consulta();
-            consulta.setVisible(true);
-            this.setVisible(false);
+            if (dao.removeProdutoBD(codigo.getCodigo())) {
+                Mensagens.msgInfo("O produto foi removido com sucesso!");
+                Consulta consulta = new Consulta();
+                consulta.setVisible(true);
+                this.setVisible(false);
+            }
         } else {
             Mensagens.msgAviso("Selecione um produto a ser removido!");
         }
@@ -219,7 +218,6 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        btnAdicionar.setEnabled(false);
         if (listaProdutos.size() == 16) {
             Mensagens.msgAviso("Você não pode cadastrar mais produtos.");
         } else {

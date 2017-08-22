@@ -13,20 +13,15 @@ public class UsuarioDAO {
             String user,
             String senha) {
         boolean verifica = false;
-        // definição da String de conexão
         String aux = "jdbc:mysql://localhost:3307/fat_truck?"
                 + "user=root&password=root";
-        // estabelecer a conexão...mysql-connector-java-5.1.42-bin.jar
         Connection conexao;
         try {
             conexao = DriverManager.getConnection(aux);
             String sql = "select user_adm, senha_adm from admin"
                     + " where user_adm = ? "
                     + " and senha_adm = ? ";
-            // enviar o select para ser analisado pelo banco
-            // de dados...
             PreparedStatement p = conexao.prepareStatement(sql);
-            // definir o valor de cada um dos parâmetros...
             p.setString(1, user);
             p.setString(2, senha);
             ResultSet rs = p.executeQuery();
@@ -36,9 +31,8 @@ public class UsuarioDAO {
             rs.close();
             p.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao validar o usuário. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao validar o login. \n " + ex.getMessage());
         }
-
         return verifica;
     }
 
@@ -53,7 +47,6 @@ public class UsuarioDAO {
             String sql = "update admin set user_adm = ?, senha_adm = ?";
 
             PreparedStatement p = conexao.prepareStatement(sql);
-            // definir o valor de cada um dos parâmetros...
             p.setString(1, user);
             p.setString(2, senha);
             p.execute();
@@ -61,7 +54,5 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao alterar o login. \n " + ex.getMessage());
         }
-
     }
-
 }
