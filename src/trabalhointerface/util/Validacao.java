@@ -22,9 +22,9 @@ public class Validacao {
         }
         return true;
     }
-    
-    public static boolean validaPNG(String campo){
-        if (campo.substring(campo.length() - 3, campo.length()).equals("png")){
+
+    public static boolean validaPNG(String campo) {
+        if (campo.substring(campo.length() - 3, campo.length()).equals("png")) {
             return true;
         }
         return false;
@@ -40,20 +40,21 @@ public class Validacao {
     }
 
     public static boolean validaFloat(JTextField campo, int min, int max) {
+        if (campo.getText().trim().isEmpty()) {
+            Mensagens.msgErro(campo.getToolTipText());
+            campo.requestFocus();
+            return false;
+        }
         try {
             float valor = Float.valueOf(campo.getText());
-            if (campo.getText().trim().isEmpty()) {
-                Mensagens.msgErro(campo.getToolTipText());
-                campo.requestFocus();
-                return false;
-            } else if (valor <= min || valor >= max) {
+            if (valor <= min || valor >= max) {
                 Mensagens.msgErro("Preço inválido.");
                 return false;
             } else {
                 return true;
             }
         } catch (NumberFormatException e) {
-            Mensagens.msgErro("Preço inválido " + e.getMessage());
+            Mensagens.msgErro("Preço inválido.");
             campo.requestFocus();
             return false;
         }
