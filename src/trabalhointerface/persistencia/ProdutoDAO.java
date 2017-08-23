@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -41,6 +40,7 @@ public class ProdutoDAO {
             p.setBinaryStream(3, fileSream, (int) file.length());
             p.execute();
             p.close();
+            conn.close();
             aux = true;
         } catch (Exception ex) {
             Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados. \n " + ex.getMessage());
@@ -63,6 +63,7 @@ public class ProdutoDAO {
             p.setInt(4, codigo);
             p.execute();
             p.close();
+            conn.close();
             aux = true;
         } catch (Exception ex) {
             Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados. \n " + ex.getMessage());
@@ -98,6 +99,7 @@ public class ProdutoDAO {
             p.setInt(1, codigo);
             p.execute();
             p.close();
+            conn.close();
             aux = true;
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao remover o produto do banco de dados. \n " + ex.getMessage());
@@ -124,6 +126,7 @@ public class ProdutoDAO {
             }
             rs.close();
             p.close();
+            conn.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao verificar o nome do produto no banco de dados. \n " + ex.getMessage());
         }
@@ -147,6 +150,7 @@ public class ProdutoDAO {
             }
             rs.close();
             p.close();
+            conn.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao carregar os produtos do banco de dados. \n " + ex.getMessage());
         }
@@ -174,6 +178,7 @@ public class ProdutoDAO {
             }
             rs.close();
             p.close();
+            conn.close();
         } catch (SQLException | IOException ex) {
             Mensagens.msgErro("Ocorreu um erro ao transformar Blob to Image \n " + ex.getMessage());
         }

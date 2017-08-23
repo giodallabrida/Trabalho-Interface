@@ -24,6 +24,7 @@ public class VendaDAO {
             p.setDate(2, Date.valueOf(LocalDate.now()));
             p.execute();
             p.close();
+            conn.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao inserir a venda no banco de dados. \n" + ex.getMessage());
         }
@@ -44,6 +45,7 @@ public class VendaDAO {
             }
             rs.close();
             p.close();
+            conn.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao calcular o total de vendas: \n" + ex.getMessage());
         }
@@ -67,6 +69,7 @@ public class VendaDAO {
             }
             rs.close();
             p.close();
+            conn.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao carregar as vendas do banco de dados: \n" + ex.getMessage());
         }

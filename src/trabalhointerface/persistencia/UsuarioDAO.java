@@ -30,6 +30,7 @@ public class UsuarioDAO {
             }
             rs.close();
             p.close();
+            conexao.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao validar o login. \n " + ex.getMessage());
         }
@@ -51,6 +52,7 @@ public class UsuarioDAO {
             p.setString(2, senha);
             p.execute();
             p.close();
+            conexao.close();
         } catch (SQLException ex) {
             Mensagens.msgErro("Ocorreu um erro ao alterar o login. \n " + ex.getMessage());
         }
