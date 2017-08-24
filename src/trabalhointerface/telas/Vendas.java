@@ -40,55 +40,58 @@ public class Vendas extends javax.swing.JFrame {
 
         ProdutoDAO produto = new ProdutoDAO();
         ArrayList<ProdutoDTO> listaProdutos = produto.carregaProdutos();
-        mprodutos = new Object[listaProdutos.size()][2];
-        int linha = 0;
-        for (ProdutoDTO pdto : listaProdutos) {
-            JButton botao = new JButton();
-            botao.setName(String.valueOf(pdto.getCodigo()));
-            mprodutos[linha][0] = botao;
-            mprodutos[linha][1] = pdto;
-            linha++;
-            botao.setText("0");
-            botao.setToolTipText(pdto.getNome() + " - R$ " + pdto.getPreco());
-            botao.setBounds(posX, posY, 135, 60);
-            botao.setIcon(pdto.getIcone());
+        if (listaProdutos.isEmpty()) {
+            btnEncerra.setEnabled(false);
+            finaliza.setEnabled(false);
+        } else {
+            mprodutos = new Object[listaProdutos.size()][2];
+            int linha = 0;
+            for (ProdutoDTO pdto : listaProdutos) {
+                JButton botao = new JButton();
+                botao.setName(String.valueOf(pdto.getCodigo()));
+                mprodutos[linha][0] = botao;
+                mprodutos[linha][1] = pdto;
+                linha++;
+                botao.setText("0");
+                botao.setToolTipText(pdto.getNome() + " - R$ " + pdto.getPreco());
+                botao.setBounds(posX, posY, 135, 60);
+                botao.setIcon(pdto.getIcone());
 
-            // o método setBounds serve para definir a posição nos eixos x e y, além
-            // da largura e altura do botão.
-            botao.setVisible(true);
+                // o método setBounds serve para definir a posição nos eixos x e y, além
+                // da largura e altura do botão.
+                botao.setVisible(true);
 
-            // adicionar um ActionListener em um controle permite que o programa
-            // possa responder a eventos específicos. o ActionListener adicionado
-            // desvia a execução do código para o método "processaPressionamentoBotao()"
-            // no qual é possível "identificar" qual foi o botão pressionado.
-            botao.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    processaPressionamentoBotao(e, botao);
+                // adicionar um ActionListener em um controle permite que o programa
+                // possa responder a eventos específicos. o ActionListener adicionado
+                // desvia a execução do código para o método "processaPressionamentoBotao()"
+                // no qual é possível "identificar" qual foi o botão pressionado.
+                botao.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        processaPressionamentoBotao(e, botao);
+                    }
+
+                });
+
+                // o botão criado acima precisa ser adicionado ao JFrame (isso não é feito
+                // de modo automático).
+                // this = JFrame. getContentPane() = método para acessar o container de controles do JFrame.
+                //this.setContentPane(scroll);
+                painel.add(botao);
+
+                // incrementa a posição no eixo Y para evitar a sobreposição dos botões.
+                posX += 165;
+                painel.add(botao);
+
+                if (posX >= 645) {
+                    posX = 25;
+                    posY += 90;
                 }
-                
-               
-            });
-
-            // o botão criado acima precisa ser adicionado ao JFrame (isso não é feito
-            // de modo automático).
-            // this = JFrame. getContentPane() = método para acessar o container de controles do JFrame.
-            //this.setContentPane(scroll);
-            painel.add(botao);
-
-            // incrementa a posição no eixo Y para evitar a sobreposição dos botões.
-            posX += 165;
-            painel.add(botao);
-
-            if (posX >= 645) {
-                posX = 25;
-                posY += 90;
-                //if (posY >= 400) {
-                //}
             }
+            this.repaint();
         }
-        this.repaint();
     }
+    
 
     private void processaPressionamentoBotao(MouseEvent e, JButton botao) {
         total.setText("");

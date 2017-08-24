@@ -1,12 +1,16 @@
 package trabalhointerface.telas;
 
 import javax.swing.JButton;
+import trabalhointerface.persistencia.UsuarioDAO;
 
 public class Menu extends javax.swing.JFrame {
+    
+    UsuarioDAO userDAO = new UsuarioDAO();
     
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        userDAO.verificaExecucao();
     }
 
     private Login login = new Login(this, true, this);

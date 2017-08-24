@@ -57,4 +57,43 @@ public class UsuarioDAO {
             Mensagens.msgErro("Ocorreu um erro ao alterar o login. \n " + ex.getMessage());
         }
     }
+
+    public void verificaExecucao() {
+        //boolean aux = false;
+        String aux = "jdbc:mysql://localhost:3307/fat_truck?"
+                + "user=root&password=root";
+        Connection conexao;
+        try {
+            conexao = DriverManager.getConnection(aux);
+            String sql = "select primeira_ex from admin where primeira_ex = ?";
+            PreparedStatement p = conexao.prepareStatement(sql);
+            p.setInt(1, 0);
+            ResultSet rs = p.executeQuery();
+            if (rs.next()) {
+                Mensagens.msgInfo("O usuário padrão é 'admin' e a senha padrão é 'admin'");
+                alteraBoolean();
+            }
+            rs.close();
+            p.close();
+            conexao.close();
+        } catch (SQLException ex) {
+            Mensagens.msgErro("Ocorreu um erro ao validar o login. \n " + ex.getMessage());
+        }
+    }
+
+    public void alteraBoolean() {
+        String aux = "jdbc:mysql://localhost:3307/fat_truck?"
+                + "user=root&password=root";
+        Connection conexao;
+        try {
+            conexao = DriverManager.getConnection(aux);
+            String sql = "update admin set primeira_ex = 1";
+            PreparedStatement p = conexao.prepareStatement(sql);
+            p.execute();
+            p.close();
+            conexao.close();
+        } catch (Exception ex) {
+            Mensagens.msgErro("Ocorreu um erro em uma alteração do banco de dados.");
+        }
+    }
 }
