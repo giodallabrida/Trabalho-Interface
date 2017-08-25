@@ -18,7 +18,7 @@ public class AlteraLogin extends javax.swing.JFrame {
         if (Validacao.validaCampo(user) && Validacao.validaString(user, "usuário") && Validacao.validaString(senha, "senha")
                 && Validacao.validaSenha(senha)) {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            aux = usuarioDAO.alteraLogin(user.getText().trim(), String.valueOf(senha.getPassword()).trim());
+            aux = usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
         }
         return aux;
     }
@@ -40,7 +40,6 @@ public class AlteraLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alterar Login");
-        setMaximumSize(new java.awt.Dimension(431, 245));
         setMinimumSize(new java.awt.Dimension(431, 245));
         setResizable(false);
 
@@ -107,7 +106,7 @@ public class AlteraLogin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(novoUsuario)
                         .addComponent(novaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

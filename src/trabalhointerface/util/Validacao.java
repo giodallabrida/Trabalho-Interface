@@ -16,7 +16,7 @@ public class Validacao {
     }
 
     public static boolean validaString(JTextField campo, String definicao) {
-        if (campo.getText().length() >= 60) {
+        if (campo.getText().trim().length() >= 60) {
             Mensagens.msgAviso("Você só pode digitar 60 caracteres no campo " + definicao + ".");
             return false;
         }

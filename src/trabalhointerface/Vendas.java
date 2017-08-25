@@ -5,7 +5,9 @@ import trabalhointerface.telas.Inicio;
 public class Vendas {
 
     /*
-Código do Banco de Dados    
+    Alunos: Eduarda Pagliosa Oliveira, Giovana Dallabrida e Matheus Nascimento Fuchina - 302
+
+    Código do Banco de Dados:    
     
 CREATE DATABASE FAT_TRUCK;
 
@@ -32,10 +34,8 @@ CREATE TABLE VENDA (
     TOTAL_VENDA BIGINT (6.2) NOT NULL
 );
      */
-    
     public static void main(String[] args) {
         Inicio inicio = new Inicio();
         inicio.setVisible(true);
-        System.out.println("");
     }
 }

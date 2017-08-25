@@ -24,4 +24,3 @@ public class Mensagens {
                 "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 }
-

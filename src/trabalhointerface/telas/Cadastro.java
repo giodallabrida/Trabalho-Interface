@@ -29,7 +29,7 @@ public class Cadastro extends javax.swing.JFrame {
     public boolean cadastraOuAlteraProduto(JTextField nome, JTextField preco, JLabel caminhoIcone) {
         boolean aux = false;
         if (Validacao.validaCampo(nome) && Validacao.validaString(nome, "nome do produto")) {
-            if (produtoDAO.verificaNome(nome.getText(), produto.getCodigo())) {
+            if (produtoDAO.verificaNome(nome.getText().trim(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
             } else if ((Validacao.validaFloat(preco, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(caminhoIcone)))) {
                 if (modoInclusao) {
@@ -118,7 +118,7 @@ public class Cadastro extends javax.swing.JFrame {
         });
 
         validacao.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
-        validacao.setText("Entre R$ 1,00 e R$ 100. ");
+        validacao.setText("De R$ 1,00 a R$ 100,00. ");
 
         validacao1.setFont(new java.awt.Font("Baskerville Old Face", 0, 14)); // NOI18N
         validacao1.setText("De 1 a 60 caracteres. ");

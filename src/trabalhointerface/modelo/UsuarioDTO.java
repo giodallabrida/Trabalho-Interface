@@ -1,6 +1,7 @@
 package trabalhointerface.modelo;
 
 public class UsuarioDTO {
+
     private String user, senha;
 
     public String getUser() {

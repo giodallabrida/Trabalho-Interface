@@ -3,6 +3,7 @@ package trabalhointerface.modelo;
 import javax.swing.ImageIcon;
 
 public class ProdutoDTO {
+
     private int codigo;
     private ImageIcon icone;
     private String nome;
@@ -46,14 +47,14 @@ public class ProdutoDTO {
     public void setPreco(float preco) {
         this.preco = preco;
     }
-    
-    public Object[] getLinhaTabela(){
+
+    public Object[] getLinhaTabela() {
         Object[] retorno = {String.valueOf(this.codigo), this, String.valueOf(this.preco)};
         return retorno;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return nome;
     }
 

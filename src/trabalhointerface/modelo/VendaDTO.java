@@ -1,6 +1,7 @@
 package trabalhointerface.modelo;
 
 public class VendaDTO {
+
     private int codigo;
     private String data;
     private float total;
@@ -9,7 +10,7 @@ public class VendaDTO {
         this.data = data;
         this.total = total;
     }
-    
+
     public int getCodigo() {
         return codigo;
     }
@@ -33,7 +34,8 @@ public class VendaDTO {
     public void setTotal(float total) {
         this.total = total;
     }
-     public Object[] getLinhaTabela(){
+
+    public Object[] getLinhaTabela() {
         Object[] retorno = {data, String.valueOf(this.total)};
         return retorno;
     }
