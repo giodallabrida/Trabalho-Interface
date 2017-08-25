@@ -1,11 +1,12 @@
 package trabalhointerface;
 
-import trabalhointerface.persistencia.UsuarioDAO;
 import trabalhointerface.telas.Inicio;
 
 public class Vendas {
 
     /*
+Código do Banco de Dados    
+    
 CREATE DATABASE FAT_TRUCK;
 
 USE FAT_TRUCK;
@@ -25,8 +26,6 @@ CREATE TABLE PRODUTO (
     ICON_PDTO BLOB NOT NULL
 );
 
-SELECT PRIMEIRA_EX FROM ADMIN;
-
 CREATE TABLE VENDA (
     COD_VENDA INT auto_increment KEY,
     DAT_VENDA DATETIME default current_timestamp() NOT NULL,
@@ -39,5 +38,4 @@ CREATE TABLE VENDA (
         inicio.setVisible(true);
         System.out.println("");
     }
-
 }

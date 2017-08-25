@@ -218,6 +218,7 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        btnAdicionar.setEnabled(false);
         if (listaProdutos.size() == 16) {
             Mensagens.msgAviso("Você não pode cadastrar mais produtos.");
         } else {
@@ -261,7 +262,6 @@ public class Consulta extends javax.swing.JFrame {
         tabela.setModel(modelo);
         tabela.setAutoResizeMode(0);
 
-        // alinhamento das colunas...
         DefaultTableCellRenderer alinhamentoCentro = new DefaultTableCellRenderer();
         DefaultTableCellRenderer alinhamentoDireita = new DefaultTableCellRenderer();
         alinhamentoCentro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -270,7 +270,6 @@ public class Consulta extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(1).setCellRenderer(alinhamentoCentro);
         tabela.getColumnModel().getColumn(2).setCellRenderer(alinhamentoDireita);
 
-        // definição da largura das colunas...
         tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(250);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(150);

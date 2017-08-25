@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,7 +42,7 @@ public class ProdutoDAO {
             conn.close();
             aux = true;
         } catch (Exception ex) {
-            Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao cadastrar o produto no banco de dados.");
         }
         return aux;
     }
@@ -66,7 +65,7 @@ public class ProdutoDAO {
             conn.close();
             aux = true;
         } catch (Exception ex) {
-            Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao alterar o produto no banco de dados.");
         }
         return aux;
     }
@@ -77,13 +76,12 @@ public class ProdutoDAO {
         Graphics g = newImage.getGraphics();
         g.drawImage(imagem.getImage(), 0, 0, null);
         g.dispose();
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             ImageIO.write(newImage, "png", baos);
             return baos.toByteArray();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Mensagens.msgErro("Ocorreu um erro ao converter a imagem.");
         }
         return null;
     }
@@ -102,7 +100,7 @@ public class ProdutoDAO {
             conn.close();
             aux = true;
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao remover o produto do banco de dados. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao remover o produto do banco de dados.");
         }
         return aux;
     }
@@ -114,7 +112,7 @@ public class ProdutoDAO {
         Connection conn;
         try {
             conn = DriverManager.getConnection(str);
-            String sql = "select lower(NOM_PDTO) from Produto "
+            String sql = "select NOM_PDTO from Produto "
                     + " where NOM_PDTO = ? "
                     + " and COD_PDTO <> ?";
             PreparedStatement p = conn.prepareStatement(sql);
@@ -128,9 +126,8 @@ public class ProdutoDAO {
             p.close();
             conn.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao verificar o nome do produto no banco de dados. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao verificar a duplicidade de nomes do produto no banco de dados.");
         }
-
         return aux;
     }
 
@@ -145,43 +142,39 @@ public class ProdutoDAO {
             PreparedStatement p = conn.prepareStatement(sql);
             ResultSet rs = p.executeQuery();
             while (rs.next()) {
-                ProdutoDTO pp = new ProdutoDTO(rs.getInt(1), rs.getString(2), rs.getFloat(3), blobToImage(rs.getBlob(4), rs.getInt(1)));
+                ProdutoDTO pp = new ProdutoDTO(rs.getInt(1), rs.getString(2), rs.getFloat(3), blobToImage(rs.getInt(1)));
                 listaPDTO.add(pp);
             }
             rs.close();
             p.close();
             conn.close();
-        } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao carregar os produtos do banco de dados. \n " + ex.getMessage());
+        } catch (Exception ex) {
+            Mensagens.msgErro("Ocorreu um erro ao carregar os produtos do banco de dados.");
         }
         return listaPDTO;
     }
 
-    private ImageIcon blobToImage(Blob blob, int cod) {
+    private ImageIcon blobToImage(int cod) throws SQLException, IOException {
         ImageIcon icon = null;
-        try {
-            byte[] imagebytes;
-            Image imagem;
+        byte[] imagebytes;
+        Image imagem;
 
-            String str = "jdbc:mysql://localhost:3307/FAT_TRUCK?"
-                    + "user=root&password=root";
-            Connection conn;
-            conn = DriverManager.getConnection(str);
-            String sql = "select (ICON_PDTO) from Produto where COD_PDTO = ?";
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setInt(1, cod);
-            ResultSet rs = p.executeQuery();
-            while (rs.next()) {
-                imagebytes = rs.getBytes(1);
-                imagem = ImageIO.read(new ByteArrayInputStream(imagebytes));
-                icon = new ImageIcon(new ImageIcon(imagem).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
-            }
-            rs.close();
-            p.close();
-            conn.close();
-        } catch (SQLException | IOException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao transformar Blob to Image \n " + ex.getMessage());
+        String str = "jdbc:mysql://localhost:3307/FAT_TRUCK?"
+                + "user=root&password=root";
+        Connection conn;
+        conn = DriverManager.getConnection(str);
+        String sql = "select (ICON_PDTO) from Produto where COD_PDTO = ?";
+        PreparedStatement p = conn.prepareStatement(sql);
+        p.setInt(1, cod);
+        ResultSet rs = p.executeQuery();
+        while (rs.next()) {
+            imagebytes = rs.getBytes(1);
+            imagem = ImageIO.read(new ByteArrayInputStream(imagebytes));
+            icon = new ImageIcon(new ImageIcon(imagem).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
         }
+        rs.close();
+        p.close();
+        conn.close();
         return icon;
     }
 }

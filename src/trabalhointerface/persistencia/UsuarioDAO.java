@@ -32,34 +32,35 @@ public class UsuarioDAO {
             p.close();
             conexao.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao validar o login. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao validar o login.");
         }
         return verifica;
     }
 
-    public void alteraLogin(
+    public boolean alteraLogin(
             String user,
             String senha) {
+        boolean verifica = false;
         String aux = "jdbc:mysql://localhost:3307/fat_truck?"
                 + "user=root&password=root";
         Connection conexao;
         try {
             conexao = DriverManager.getConnection(aux);
             String sql = "update admin set user_adm = ?, senha_adm = ?";
-
             PreparedStatement p = conexao.prepareStatement(sql);
             p.setString(1, user);
             p.setString(2, senha);
             p.execute();
             p.close();
             conexao.close();
+            verifica = true;
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao alterar o login. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao alterar o login.");
         }
+        return verifica;
     }
 
     public void verificaExecucao() {
-        //boolean aux = false;
         String aux = "jdbc:mysql://localhost:3307/fat_truck?"
                 + "user=root&password=root";
         Connection conexao;
@@ -70,14 +71,14 @@ public class UsuarioDAO {
             p.setInt(1, 0);
             ResultSet rs = p.executeQuery();
             if (rs.next()) {
-                Mensagens.msgInfo("O usuário padrão é 'admin' e a senha padrão é 'admin'");
+                Mensagens.msgInfo("O usuário padrão é 'admin' e a senha padrão é 'admin'.");
                 alteraBoolean();
             }
             rs.close();
             p.close();
             conexao.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao validar o login. \n " + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao verificar se é a primeira execução do programa.");
         }
     }
 

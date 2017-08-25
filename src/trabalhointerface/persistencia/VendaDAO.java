@@ -26,7 +26,7 @@ public class VendaDAO {
             p.close();
             conn.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao inserir a venda no banco de dados. \n" + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao inserir a venda no banco de dados.");
         }
     }
 
@@ -47,7 +47,7 @@ public class VendaDAO {
             p.close();
             conn.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao calcular o total de vendas: \n" + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao obter o total de vendas");
         }
         return total;
     }
@@ -71,7 +71,7 @@ public class VendaDAO {
             p.close();
             conn.close();
         } catch (SQLException ex) {
-            Mensagens.msgErro("Ocorreu um erro ao carregar as vendas do banco de dados: \n" + ex.getMessage());
+            Mensagens.msgErro("Ocorreu um erro ao carregar as vendas do banco de dados.");
         }
         return listaVDTO;
     }

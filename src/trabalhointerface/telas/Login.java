@@ -153,7 +153,6 @@ public class Login extends javax.swing.JDialog {
             userUsuario.setText("");
             senhaUsuario.setText("");
         }
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -174,13 +173,10 @@ public class Login extends javax.swing.JDialog {
     }
 
     public boolean fazLogin(JTextField user, JPasswordField senha) {
-        // validar nome de usuário e senha - não vazios...
         boolean aux = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        if (Validacao.validaCampo(user) && Validacao.validaString(user) && Validacao.validaString(senha)
-                && Validacao.validaSenha(senha)) {
+        if (Validacao.validaCampo(user) && Validacao.validaSenha(senha)) {
             if (usuarioDAO.validaUsuario(user.getText(), String.valueOf(senha.getPassword()))) {
-                // chamar o menu principal...
                 aux = true;
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha inválidos", "Erro de Autenticação", JOptionPane.INFORMATION_MESSAGE);

@@ -4,9 +4,9 @@ import javax.swing.JButton;
 import trabalhointerface.persistencia.UsuarioDAO;
 
 public class Menu extends javax.swing.JFrame {
-    
+
     UsuarioDAO userDAO = new UsuarioDAO();
-    
+
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -14,7 +14,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     private Login login = new Login(this, true, this);
-    
+
     public JButton getBtnAlterar() {
         return btnAlterar;
     }
@@ -22,7 +22,7 @@ public class Menu extends javax.swing.JFrame {
     public JButton getBtnRelatorio() {
         return btnRelatorio;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

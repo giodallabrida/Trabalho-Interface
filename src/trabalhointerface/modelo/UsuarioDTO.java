@@ -3,10 +3,6 @@ package trabalhointerface.modelo;
 public class UsuarioDTO {
     private String user, senha;
 
-    public UsuarioDTO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public String getUser() {
         return user;
     }

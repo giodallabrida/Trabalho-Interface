@@ -13,7 +13,6 @@ public class Cadastro extends javax.swing.JFrame {
     private final ProdutoDTO produto;
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    //caminho.setText(cod.getIcone().toString());
     public Cadastro(boolean modoInclusao, ProdutoDTO produto) {
         this.modoInclusao = modoInclusao;
         this.produto = produto;
@@ -29,14 +28,14 @@ public class Cadastro extends javax.swing.JFrame {
 
     public boolean cadastraOuAlteraProduto(JTextField nome, JTextField preco, JLabel caminhoIcone) {
         boolean aux = false;
-        if (Validacao.validaCampo(nome) && Validacao.validaString(nome)) {
+        if (Validacao.validaCampo(nome) && Validacao.validaString(nome, "nome do produto")) {
             if (produtoDAO.verificaNome(nome.getText(), produto.getCodigo())) {
                 Mensagens.msgAviso("Esse produto já está cadastrado no BD.");
             } else if ((Validacao.validaFloat(preco, 0, 101)) && (!modoInclusao || (modoInclusao && Validacao.validaIcone(caminhoIcone)))) {
                 if (modoInclusao) {
-                    aux = produtoDAO.cadastraProdutoBD(nome.getText(), Float.valueOf(preco.getText()), caminhoIcone.getText());
+                    aux = produtoDAO.cadastraProdutoBD(nome.getText().trim(), Float.valueOf(preco.getText()), caminhoIcone.getText());
                 } else {
-                    aux = produtoDAO.alteraProdutoBD(nomeProduto.getText(), Float.valueOf(precoProduto.getText()), iconeProduto.getIcon(), produto.getCodigo());
+                    aux = produtoDAO.alteraProdutoBD(nomeProduto.getText().trim(), Float.valueOf(precoProduto.getText()), iconeProduto.getIcon(), produto.getCodigo());
                 }
                 if (modoInclusao && aux) {
                     Mensagens.msgInfo("Produto adicionado com sucesso.");

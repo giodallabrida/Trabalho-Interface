@@ -15,11 +15,10 @@ public class AlteraLogin extends javax.swing.JFrame {
 
     public boolean alteraLogin(JTextField user, JPasswordField senha) {
         boolean aux = false;
-        if (Validacao.validaCampo(user) && Validacao.validaString(user) && Validacao.validaString(senha)
+        if (Validacao.validaCampo(user) && Validacao.validaString(user, "usuário") && Validacao.validaString(senha, "senha")
                 && Validacao.validaSenha(senha)) {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.alteraLogin(user.getText(), String.valueOf(senha.getPassword()));
-            aux = true;
+            aux = usuarioDAO.alteraLogin(user.getText().trim(), String.valueOf(senha.getPassword()).trim());
         }
         return aux;
     }
@@ -149,7 +148,6 @@ public class AlteraLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
         if (alteraLogin(novoUsuario, novaSenha)) {
             Mensagens.msgInfo("Login alterado com sucesso.");
             Menu menu = new Menu();
@@ -159,7 +157,6 @@ public class AlteraLogin extends javax.swing.JFrame {
             novoUsuario.setText("");
             novaSenha.setText("");
         }
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

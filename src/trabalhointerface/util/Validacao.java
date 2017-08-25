@@ -15,19 +15,16 @@ public class Validacao {
         return true;
     }
 
-    public static boolean validaString(JTextField campo) {
+    public static boolean validaString(JTextField campo, String definicao) {
         if (campo.getText().length() >= 60) {
-            Mensagens.msgAviso("Você só pode digitar 60 caracteres.");
+            Mensagens.msgAviso("Você só pode digitar 60 caracteres no campo " + definicao + ".");
             return false;
         }
         return true;
     }
 
     public static boolean validaPNG(String campo) {
-        if (campo.substring(campo.length() - 3, campo.length()).equals("png")) {
-            return true;
-        }
-        return false;
+        return campo.substring(campo.length() - 3, campo.length()).equals("png");
     }
 
     public static boolean validaSenha(JPasswordField campo) {

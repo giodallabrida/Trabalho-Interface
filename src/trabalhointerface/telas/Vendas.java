@@ -34,7 +34,6 @@ public class Vendas extends javax.swing.JFrame {
     public Object[][] mprodutos = null;
 
     public void criaBotoes() {
-        // posições nos eixos X e Y de cada botão...
         int posX = 25;
         int posY = 20;
 
@@ -56,30 +55,14 @@ public class Vendas extends javax.swing.JFrame {
                 botao.setToolTipText(pdto.getNome() + " - R$ " + pdto.getPreco());
                 botao.setBounds(posX, posY, 135, 60);
                 botao.setIcon(pdto.getIcone());
-
-                // o método setBounds serve para definir a posição nos eixos x e y, além
-                // da largura e altura do botão.
                 botao.setVisible(true);
-
-                // adicionar um ActionListener em um controle permite que o programa
-                // possa responder a eventos específicos. o ActionListener adicionado
-                // desvia a execução do código para o método "processaPressionamentoBotao()"
-                // no qual é possível "identificar" qual foi o botão pressionado.
                 botao.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         processaPressionamentoBotao(e, botao);
                     }
-
                 });
-
-                // o botão criado acima precisa ser adicionado ao JFrame (isso não é feito
-                // de modo automático).
-                // this = JFrame. getContentPane() = método para acessar o container de controles do JFrame.
-                //this.setContentPane(scroll);
                 painel.add(botao);
-
-                // incrementa a posição no eixo Y para evitar a sobreposição dos botões.
                 posX += 165;
                 painel.add(botao);
 
@@ -91,7 +74,6 @@ public class Vendas extends javax.swing.JFrame {
             this.repaint();
         }
     }
-    
 
     private void processaPressionamentoBotao(MouseEvent e, JButton botao) {
         total.setText("");
@@ -307,5 +289,4 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
-
 }
